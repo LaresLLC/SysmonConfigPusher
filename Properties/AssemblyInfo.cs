@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SysmonConfigManager")]
+[assembly: AssemblyTitle("SysmonConfigPusher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SysmonConfigManager")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyProduct("SysmonConfigPusher")]
+[assembly: AssemblyCopyright("@Antonlovesdnb")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

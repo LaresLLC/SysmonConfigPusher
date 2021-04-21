@@ -11,18 +11,24 @@ using Ceen.Httpd;
 using Ceen.Httpd.Handler;
 using Ceen.Httpd.Logging;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 
-namespace SysmonConfigManager
+
+
+
+
+namespace SysmonConfigPusher
 
 {
+    
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private object result;
+        //private object result;
 
         public MainWindow()
         {
@@ -55,8 +61,10 @@ namespace SysmonConfigManager
         {
             List<string> computerNames = new List<string>();
 
-            // Wnat to turn this LDAP entry into a config value of some kind, at some point
-            using (DirectoryEntry entry = new DirectoryEntry("LDAP://larescf"))
+            string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");
+            
+            using (DirectoryEntry entry = new DirectoryEntry("LDAP://"+configDomainName))
+            
             {
                 using (DirectorySearcher mySearcher = new DirectorySearcher(entry))
                 {
@@ -102,6 +110,12 @@ namespace SysmonConfigManager
 
         public void ExecuteCommand_Click(object sender, RoutedEventArgs e)
         {
+            if (Configs.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Error, Please Select a Configuration Value");
+                return;
+            }
+
             string selectedItem = Configs.Items[Configs.SelectedIndex].ToString();
             bool containsTag = selectedItem.Contains("Tag");
 
@@ -117,6 +131,16 @@ namespace SysmonConfigManager
                 System.Windows.MessageBox.Show("Error, Select config value, not the tag");
                 return;
             }
+
+            string WebServerLabelContent = (string)WebServerLabel.Content;
+
+            if (WebServerLabelContent == "Web Server Stopped")
+            {
+                System.Windows.MessageBox.Show("Start the Web Server First");
+                return;
+            }
+
+
         
             //RegEx: ([^\\]*)$
 
@@ -135,9 +159,12 @@ namespace SysmonConfigManager
                 //Selected Sysmon Config Variable Name = FinalSysmonMatchedConfig
                 var FinalSysmonMatchedConfig = MatchedSysmonConfig.ToString();
 
+                //Get Web Server IP Address from config
+                string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
+
                 inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Path C:\\ -Name SysmonFiles -ItemType Directory";
-                inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://192.168.1.134/" + FinalSysmonMatchedConfig + " -OutFile C:\\SysmonFiles\\" + FinalSysmonMatchedConfig;
-                //inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://192.168.1.134/config.xml -OutFile config.xml";
+                
+                inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://"+ configWebServerIP +"/" + FinalSysmonMatchedConfig + " -OutFile C:\\SysmonFiles\\" + FinalSysmonMatchedConfig;
                 inParams["CurrentDirectory"] = @"C:\";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
@@ -158,13 +185,16 @@ namespace SysmonConfigManager
         
         private void StartWebServer_Click(object sender, RoutedEventArgs e)
         {
+            string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
+
             WebServerLabel.Content = "Web Server Stopped";
 
             var tcs = new CancellationTokenSource();
             var config = new ServerConfig()
                 .AddLogger(new CLFStdOut())
                 //This is the directory where the Sysmon files live
-                .AddRoute(new FileHandler("C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\"));
+                
+                .AddRoute(new FileHandler(configSysmonConfigLocation));
             var task = HttpServer.ListenAsync(
                 new IPEndPoint(IPAddress.Any, 80),
                 false,
@@ -178,11 +208,14 @@ namespace SysmonConfigManager
 
         public void LoadConfigs_Click(object sender, RoutedEventArgs e)
         {
+            string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
+
             Configs.Items.Clear();
 
             Regex tagregex = new Regex(@"(?<=SCMTAG\: )((?<config_tag>.*))(?=\-\-\>)");
 
-            var sourceDirectory =  "C:\\Users\\Administrator\\Desktop\\SysmonConfigs";
+            //Needs to be in config
+            var sourceDirectory =  configSysmonConfigLocation;
             var SysmonConfigs = Directory.EnumerateFiles(sourceDirectory, "*.xml");
 
             foreach(string currentSysmonConfig in SysmonConfigs)

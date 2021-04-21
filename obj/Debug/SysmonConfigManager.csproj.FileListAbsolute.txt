@@ -18,4 +18,3 @@ C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Microsoft.Owin
 C:\Users\Administrator\source\repos\SysmonConfigManager\obj\Debug\SysmonConfigManager.csproj.CopyComplete
 C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Ceen.Common.dll
 C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Ceen.Httpd.dll
-C:\Users\Administrator\source\repos\SysmonConfigManager\obj\Debug\SysmonConfigManager_Content.g.cs
