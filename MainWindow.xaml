@@ -38,9 +38,11 @@
         <GroupBox Grid.Column="2" Header="Deploy Step 2" HorizontalAlignment="Left" Height="100" Margin="195.8,302,-308.6,0" VerticalAlignment="Top" Width="240"/>
         <GroupBox Grid.Column="2" Header="Deploy Step 3" HorizontalAlignment="Left" Height="100" Margin="195.6,21.6,-307.6,0" VerticalAlignment="Top" Width="240" Grid.Row="1"/>
         <GroupBox Grid.Column="2" Header="Deploy Step 4" HorizontalAlignment="Left" Height="100" Margin="197.4,147.6,-308.6,0" VerticalAlignment="Top" Width="240" Grid.Row="1"/>
-        <GroupBox Grid.ColumnSpan="2" Header="Prepare Step 1" HorizontalAlignment="Left" Height="100" Margin="20,21,0,0" VerticalAlignment="Top" Width="230"/>
-        <GroupBox Header="Prepare Step 3" HorizontalAlignment="Left" Height="100" Margin="398.6,21,0,0" VerticalAlignment="Top" Width="259" Grid.Column="1"/>
-        <GroupBox Header="Prepare Step 2" HorizontalAlignment="Left" Height="100" Margin="149.6,21,0,0" VerticalAlignment="Top" Width="234" Grid.Column="1"/>
+        <GroupBox Grid.ColumnSpan="2" Header="Prepare Step 1" HorizontalAlignment="Left" Height="113" Margin="20,21,0,0" VerticalAlignment="Top" Width="230">
+            <Button x:Name="FromFile" Content="Load Computers From File" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="172" Height="29" Click="FromFile_Click"/>
+        </GroupBox>
+        <GroupBox Header="Prepare Step 3" HorizontalAlignment="Left" Height="108" Margin="398.4,21,0,0" VerticalAlignment="Top" Width="259" Grid.Column="1"/>
+        <GroupBox Header="Prepare Step 2" HorizontalAlignment="Left" Height="108" Margin="149.4,21,0,0" VerticalAlignment="Top" Width="234" Grid.Column="1"/>
         <GroupBox Header="Web Server" HorizontalAlignment="Left" Height="127" Margin="196,40,-309.6,0" VerticalAlignment="Top" Width="240" Grid.Column="2"/>
         <Separator Height="21" Margin="20,134,-27,0" VerticalAlignment="Top" Grid.ColumnSpan="3" RenderTransformOrigin="0.501,0.448" HorizontalAlignment="Left" Width="931"/>
         <Separator Height="21" Margin="532.4,339,-334.4,0" VerticalAlignment="Top" Grid.ColumnSpan="2" RenderTransformOrigin="0.501,0.366" HorizontalAlignment="Left" Width="586" Grid.Column="1">

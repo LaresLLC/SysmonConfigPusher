@@ -12,7 +12,7 @@ using Ceen.Httpd.Handler;
 using Ceen.Httpd.Logging;
 using System.Text.RegularExpressions;
 using System.Configuration;
-
+using System.Windows.Forms;
 
 
 
@@ -99,6 +99,8 @@ namespace SysmonConfigPusher
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
+            //Need better logic for handling duplicates here
+            //SelectedComputerList.Items.Clear();
 
             var SelectedComputers = ComputerList.SelectedItems;
             foreach (object SelectedComputer in SelectedComputers)
@@ -332,6 +334,26 @@ namespace SysmonConfigPusher
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
             }
+        }
+
+        private void FromFile_Click(object sender, RoutedEventArgs e)
+        {
+            //Ref-https://www.c-sharpcorner.com/UploadFile/mahesh/openfiledialog-in-C-Sharp/
+            //Ref-https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/how-to-read-from-a-text-file
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.ShowDialog();
+            openFileDialog1.Title = "Browse to your list of Computers (.txt)";
+            openFileDialog1.DefaultExt = "txt";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            string[] computers = System.IO.File.ReadAllLines(openFileDialog1.FileName);
+
+            foreach (string computer in computers)
+            {
+                ComputerList.Items.Add(computer);
+            }
+
+            
+           
         }
     }
 }
