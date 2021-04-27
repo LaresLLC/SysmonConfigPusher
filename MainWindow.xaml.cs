@@ -355,6 +355,42 @@ namespace SysmonConfigPusher
             
            
         }
+
+        private void UnInstallSysmon_Click(object sender, RoutedEventArgs e)
+        {
+            System.Collections.IList
+            //This grabs the selected computer variable
+            ComputerSelected = SelectedComputerList.SelectedItems;
+            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            foreach (object SelectedComputer in ComputerSelected)
+            {
+                ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
+                ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
+
+                inParams["CommandLine"] = "Sysmon64.exe -u";
+                inParams["CurrentDirectory"] = @"C:\SysmonFiles";
+
+                ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+            }
+        }
+
+        private void InstallSysmon_Click(object sender, RoutedEventArgs e)
+        {
+            System.Collections.IList
+            //This grabs the selected computer variable
+            ComputerSelected = SelectedComputerList.SelectedItems;
+            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            foreach (object SelectedComputer in ComputerSelected)
+            {
+                ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
+                ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
+
+                inParams["CommandLine"] = "Sysmon64.exe -accepteula -i";
+                inParams["CurrentDirectory"] = @"C:\SysmonFiles";
+
+                ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+            }
+        }
     }
 }
            
