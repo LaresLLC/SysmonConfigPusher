@@ -33,7 +33,7 @@ The configuration for Sysmon Config Pusher has three main values that you will w
 
 - DomainName: This is the domain that SysmonConfigPusher will load computers from (You Can also load a list of computers via a text file)
 - WebServerIP: SysmonConfigPusher has a built in web server which endpoints connect to in order to download the appropriate Sysmon configuration file, this value needs to be set to an IP address that is able to bind to port 80
-- SysmonConfigLocation: This is the directory, on the host that is running SysmonConfigPusher, that holds your various Sysmon configs - NOTE: The "\" need to be escaped here
+- SysmonConfigLocation: This is the directory, on the host that is running SysmonConfigPusher, that holds your various Sysmon configs - NOTE: The "\\" need to be escaped here
 
 An example: 
 
