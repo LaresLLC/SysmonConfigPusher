@@ -214,7 +214,7 @@ namespace SysmonConfigPusher
 
             Configs.Items.Clear();
 
-            Regex tagregex = new Regex(@"(?<=SCMTAG\: )((?<config_tag>.*))(?=\-\-\>)");
+            Regex tagregex = new Regex(@"(?<=SCPTAG\: )((?<config_tag>.*))(?=\-\-\>)");
 
             //Needs to be in config
             var sourceDirectory =  configSysmonConfigLocation;
