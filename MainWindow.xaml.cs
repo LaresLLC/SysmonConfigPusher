@@ -13,10 +13,7 @@ using Ceen.Httpd.Logging;
 using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Windows.Forms;
-
-
-
-
+using System.Linq;
 
 namespace SysmonConfigPusher
 
@@ -39,7 +36,9 @@ namespace SysmonConfigPusher
         public object Controls { get; private set; }
 
         // Stuff that happens when you click the "Get Domain Computers" Button
-        private void Button_Click(object sender, RoutedEventArgs e)
+       
+
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             List<String> ComputerNames = GetComputers();
             // Clear the values in case the button is clicked twice
@@ -48,7 +47,7 @@ namespace SysmonConfigPusher
             {
                 ComputerList.Items.Add(Computer);
             }
-
+            
         }
 
         private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -390,6 +389,45 @@ namespace SysmonConfigPusher
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
             }
+        }
+
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+
+            //Need to convert the list of computers from the list box into a list first: https://stackoverflow.com/questions/1565504/most-succinct-way-to-convert-listbox-items-to-a-generic-list
+
+            //ComputersList is the string version of the ListBox contents ComputerList
+
+            var ComputersList = ComputerList.Items.Cast<String>().ToList();
+
+            //REF: https://stackoverflow.com/questions/29963240/textbox-textchange-to-update-an-onscreen-listbox-in-c-sharp
+
+            //I'm not sure exactly what this line does
+            System.Windows.Controls.TextBox s = (System.Windows.Controls.TextBox)sender;
+
+            //Clear the results when searching
+            ComputerList.Items.Clear();
+
+            //Loop through newly created list of computers and compare the text, if there is a match, add it to the ListBox
+            foreach (string value in ComputersList)
+            {
+                if (value.IndexOf(s.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    ComputerList.Items.Add(value);
+                }
+            }
+        }
+
+        private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Clear();
+        }
+
+        private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtSearch.AppendText("Filter for Computer...");
         }
     }
 }
