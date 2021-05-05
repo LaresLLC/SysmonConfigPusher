@@ -38,3 +38,8 @@ C:\Users\administrator\Documents\GitHub\SysmonConfigPusher\obj\Debug\SysmonConfi
 C:\Users\administrator\Documents\GitHub\SysmonConfigPusher\obj\Debug\SysmonConfigPusher.csproj.CopyComplete
 C:\Users\administrator\Documents\GitHub\SysmonConfigPusher\obj\Debug\SysmonConfigPusher.exe
 C:\Users\administrator\Documents\GitHub\SysmonConfigPusher\obj\Debug\SysmonConfigPusher.pdb
+C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Serilog.dll
+C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Serilog.Sinks.File.dll
+C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Serilog.xml
+C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Serilog.Sinks.File.pdb
+C:\Users\Administrator\source\repos\SysmonConfigManager\bin\Debug\Serilog.Sinks.File.xml

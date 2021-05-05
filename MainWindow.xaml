@@ -44,7 +44,7 @@
         <GroupBox Header="Deploy Step 0: Web Server" HorizontalAlignment="Left" Height="123" Margin="152.6,6,-219.6,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 1: Create Directories" HorizontalAlignment="Left" Height="123" Margin="152.6,134,-218.8,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 2: Push Sysmon Executable" HorizontalAlignment="Left" Height="123" Margin="152.6,262,-218,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
-        <GroupBox Header="Deploy Step 3: Install Sysmon" HorizontalAlignment="Left" Height="123" Margin="152.6,390,-217.2,0" VerticalAlignment="Top" Width="271" Grid.Column="2" Grid.RowSpan="2" FontWeight="Bold"/>
+        <GroupBox Header="Deploy Step 3: Install Sysmon" HorizontalAlignment="Left" Height="123" Margin="153,390,-211.2,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold" Grid.RowSpan="2"/>
         <GroupBox Header="Deploy Step 4: Push Sysmon Config" HorizontalAlignment="Left" Height="123" Margin="152.6,115.6,-216.4,0" VerticalAlignment="Top" Width="271" Grid.Column="2" Grid.Row="1" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 5: Update Config" HorizontalAlignment="Left" Height="123" Margin="152.6,243.6,-215.6,0" VerticalAlignment="Top" Width="271" Grid.Column="2" Grid.Row="1" FontWeight="Bold"/>
         <GroupBox Header="Uninstall / Upgrade" HorizontalAlignment="Left" Height="123" Margin="131,283,0,0" VerticalAlignment="Top" Width="271" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>

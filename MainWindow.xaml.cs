@@ -14,22 +14,34 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Windows.Forms;
 using System.Linq;
+using System.Net.NetworkInformation;
+using Serilog;
+using System.Diagnostics.Eventing.Reader;
+
 
 namespace SysmonConfigPusher
 
 {
-    
+
+
+
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         //private object result;
 
         public MainWindow()
         {
             InitializeComponent();
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("SysmonConfigPusher.log", rollingInterval: RollingInterval.Month)
+            .CreateLogger();
 
         }
 
@@ -58,6 +70,7 @@ namespace SysmonConfigPusher
         // This part gets the list of computers from the domain
         public static List<string> GetComputers()
         {
+
             List<string> computerNames = new List<string>();
 
             string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");
@@ -77,7 +90,21 @@ namespace SysmonConfigPusher
 
                     // Let searcher know which properties are going to be used, and only load those
                     mySearcher.PropertiesToLoad.Add("name");
+                    //Ref: https://stackoverflow.com/questions/4094682/c-sharp-check-domain-is-live
 
+                    Ping pingSender = new Ping();
+                    PingReply reply = pingSender.Send(configDomainName);
+                    
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        Log.Information("Domain Ping Check Complete for " + configDomainName);
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
+                        Log.Information("Failed Domain Ping Check for " + configDomainName);
+                    }
+                    
                     foreach (SearchResult resEnt in mySearcher.FindAll())
                     {
                         // Note: Properties can contain multiple values.
@@ -99,12 +126,22 @@ namespace SysmonConfigPusher
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
             //Need better logic for handling duplicates here
-            //SelectedComputerList.Items.Clear();
-
+           SelectedComputerList.Items.Clear();
+            Ping pingSender = new Ping();
             var SelectedComputers = ComputerList.SelectedItems;
             foreach (object SelectedComputer in SelectedComputers)
             {
-                SelectedComputerList.Items.Add(SelectedComputer);
+                PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString());
+                if(ComputerPingReply.Status == IPStatus.Success)
+                {
+                    SelectedComputerList.Items.Add(SelectedComputer);
+                    Log.Information(SelectedComputer + " Passed Ping Check");
+                }
+                else
+                {
+                    Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
+                }
+                
             }
 
         }
@@ -154,6 +191,7 @@ namespace SysmonConfigPusher
             //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
+                
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
@@ -163,12 +201,11 @@ namespace SysmonConfigPusher
                 //Get Web Server IP Address from config
                 string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
 
-                inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Path C:\\ -Name SysmonFiles -ItemType Directory";
-                
                 inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://"+ configWebServerIP +"/" + FinalSysmonMatchedConfig + " -OutFile C:\\SysmonFiles\\" + FinalSysmonMatchedConfig;
                 inParams["CurrentDirectory"] = @"C:\";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+                Log.Information("Pushing " + FinalSysmonMatchedConfig + " to " + SelectedComputer);
             }
             
         }
@@ -187,6 +224,7 @@ namespace SysmonConfigPusher
         private void StartWebServer_Click(object sender, RoutedEventArgs e)
         {
             string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
+            string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
 
             WebServerLabel.Content = "Web Server Stopped";
 
@@ -203,7 +241,7 @@ namespace SysmonConfigPusher
                 tcs.Token
             );
             WebServerLabel.Content = "Web Server Started";
-           
+            Log.Information("Web Server Started on " + configWebServerIP + ", serving configs from " + configSysmonConfigLocation);
 
         }
 
@@ -255,6 +293,7 @@ namespace SysmonConfigPusher
                 inParams["CurrentDirectory"] = @"C:\";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+                Log.Information("SysmonFiles Directory created on " + SelectedComputer);
             }
 
         }
@@ -292,22 +331,42 @@ namespace SysmonConfigPusher
             //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
-                
-        
-                
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
                 //Selected Sysmon Config Variable Name = FinalSysmonMatchedConfig
                 var FinalSysmonMatchedConfig = MatchedSysmonConfig.ToString();
-
-                
-                inParams["CommandLine"] = "Sysmon64.exe -c " + FinalSysmonMatchedConfig;
+                                
+                inParams["CommandLine"] = "C:\\SysmonFiles\\Sysmon.exe -c " + FinalSysmonMatchedConfig;
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
-            }
 
+                Log.Information("Updated " + SelectedComputer + " with " + FinalSysmonMatchedConfig);
+
+                string logQuery = "*[System[(EventID = 16)]]";
+
+                EventLogSession session = new EventLogSession(SelectedComputer.ToString());
+
+                EventLogQuery query = new EventLogQuery("Microsoft-Windows-Sysmon/Operational", PathType.LogName, logQuery);
+
+                query.Session = session;
+
+                EventLogReader logReader = new EventLogReader(query);
+
+                for(EventRecord eventdetail = logReader.ReadEvent(); eventdetail!=null; eventdetail = logReader.ReadEvent())
+                {
+                    string EventData = eventdetail.ToXml();
+
+                    Regex SHA256 = new Regex(@"[A-Fa-f0-9]{64}");
+                    Match SHA256Value = SHA256.Match(EventData);
+                    Regex LoggedEventTime = new Regex(@"\d\d\d\d\-\d\d\-\d\d.\d\d\:\d\d\:\d\d\.\d\d\d");
+                    Match MatchedLoggedEventTime = LoggedEventTime.Match(EventData);
+
+                    Log.Information("Found Config Update Event on " + SelectedComputer + " Logged at " + MatchedLoggedEventTime + "." + " Updated with config file with the SHA256 Hash of: " + SHA256Value.ToString());
+                    
+                }
+            }
         }
 
         private void PushExecutable_Click(object sender, RoutedEventArgs e)
@@ -328,10 +387,12 @@ namespace SysmonConfigPusher
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
 
-                inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://live.sysinternals.com/Sysmon64.exe -OutFile C:\\SysmonFiles\\Sysmon64.exe";
+                inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://live.sysinternals.com/Sysmon.exe -OutFile C:\\SysmonFiles\\Sysmon.exe";
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+
+                Log.Information("Sysmon executable pushed to " + SelectedComputer);
             }
         }
 
@@ -366,10 +427,11 @@ namespace SysmonConfigPusher
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
-                inParams["CommandLine"] = "Sysmon64.exe -u";
+                inParams["CommandLine"] = "Sysmon.exe -u";
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+                Log.Information("Sysmon removed from " + SelectedComputer);
             }
         }
 
@@ -384,10 +446,12 @@ namespace SysmonConfigPusher
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
-                inParams["CommandLine"] = "Sysmon64.exe -accepteula -i";
+                inParams["CommandLine"] = "C:\\SysmonFiles\\Sysmon.exe -accepteula -i";
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+
+                Log.Information("Sysmon installed on " + SelectedComputer);
             }
         }
 
