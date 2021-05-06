@@ -150,7 +150,31 @@ The majority of the the other functionality within the app uses the same logic, 
 inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Path C:\\ -Name SysmonFiles -ItemType Directory";
 ```
 
-# Security Concerns
+# Security & Artifacts
 
-- Uses Port 80
-- Give a list of event IDs
+Because SysmonConfigPusher uses a privileged account, it's a good idea to monitor exactly what this account is doing and ensuring that it is only doing things that SysmonConfigPusher is configured to do and that is logging in from the server that SysmonConfigPusher is being ran on. There are only a few commands issued by SysmonConfigPusher to remote systems, so baselining this activity should be straight forward.
+
+## Create Directories
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event:
+```xml
+ <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0x12ac</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">PowerShell -WindowStyle Hidden -Command New-Item -Path C:\ -Name SysmonFiles -ItemType Directory</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x550fcef</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+
+
