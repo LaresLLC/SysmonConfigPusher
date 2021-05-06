@@ -58,6 +58,7 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
+        <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Click="Button_Click_4" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

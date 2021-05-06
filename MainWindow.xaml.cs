@@ -127,24 +127,37 @@ namespace SysmonConfigPusher
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
+            
             //Need better logic for handling duplicates here
-           SelectedComputerList.Items.Clear();
+            SelectedComputerList.Items.Clear();
             Ping pingSender = new Ping();
+            
+
+
             var SelectedComputers = ComputerList.SelectedItems;
             // Looping through the computers that are in the domain or populated via a text file - this logic performs a ping check on the computers and adds them to the middle computers you want to action listbox, these are the computers that will have various commands issued to them
             foreach (object SelectedComputer in SelectedComputers)
             {
+                
                 // Want to test for a ping response before adding the computer to the list, if it passed the ping check, add it to the listbox, if it does not pass the ping check, don't add it to the listbox and log it 
-                PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString());
-                if(ComputerPingReply.Status == IPStatus.Success)
+                // This part is very slow, I tried playing with ping options like buffer, ttl and timeouts with no noticeable impact, this part needs optimization for large computer lists
+                try
                 {
-                    SelectedComputerList.Items.Add(SelectedComputer);
-                    Log.Information(SelectedComputer + " Passed Ping Check");
+                    PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString());
+                    if (ComputerPingReply.Status == IPStatus.Success)
+                    {
+                        SelectedComputerList.Items.Add(SelectedComputer);
+                        Log.Information(SelectedComputer + " Passed Ping Check");
+                    }
+                    else
+                    {
+                        Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
+                    }
                 }
-                else
+                catch (Exception pingexception)
                 {
-                    Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
-                }             
+                    Log.Information(pingexception.Message);
+                }
             }
         }
 
@@ -166,7 +179,6 @@ namespace SysmonConfigPusher
             {
                 System.Windows.MessageBox.Show("Please Select a Computer");
                 return;
-
             }
 
             // The tag value is there for display only, so you can see which Sysmon config has what tag applied, but this can be a little confusing, so an error message is shown when the tag value is selected instead of the config value - the config value itself needs to be selected as we pass that value to a command later
@@ -473,22 +485,16 @@ namespace SysmonConfigPusher
             }
         }
 
-        // Code for the search bar, clobbered together from various stack overflow posts
+        // Code for the search bar, clobbered together from various stack overflow posts - the searchbar works but does not behave very well and is a but cumbersome
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             
-
             //Need to convert the list of computers from the list box into a list first: https://stackoverflow.com/questions/1565504/most-succinct-way-to-convert-listbox-items-to-a-generic-list
-
             //ComputersList is the string version of the ListBox contents ComputerList
-
             var ComputersList = ComputerList.Items.Cast<String>().ToList();
-
             //REF: https://stackoverflow.com/questions/29963240/textbox-textchange-to-update-an-onscreen-listbox-in-c-sharp
-
             //I'm not sure exactly what this line does
             System.Windows.Controls.TextBox s = (System.Windows.Controls.TextBox)sender;
-
             //Clear the results when searching
             ComputerList.Items.Clear();
 
@@ -509,9 +515,13 @@ namespace SysmonConfigPusher
 
         private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
         {
-            txtSearch.AppendText("Filter for Computer...");
+            //This breaks the selection in the listbox, so it's commented out for now
+            //txtSearch.AppendText("Filter for Computer...");
+        }
+        // Stuff that happens when you click "Select All"
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ComputerList.SelectAll();
         }
     }
 }
-           
-
