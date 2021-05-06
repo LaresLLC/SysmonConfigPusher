@@ -25,3 +25,41 @@
 2021-05-05 15:32:09.750 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-05T19:02:15.011. Updated with config file with the SHA256 Hash of: C7E09E1E5336F65817B1A797820B579286A32CFFF52FBD295C70892DF46814C9
 2021-05-05 15:32:09.750 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-05T19:31:14.151. Updated with config file with the SHA256 Hash of: 
 2021-05-05 15:32:38.263 -04:00 [INF] Sysmon removed from WIN10-1
+2021-05-06 08:39:12.179 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 08:39:14.492 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 08:39:19.839 -04:00 [INF] Sysmon removed from WIN10-1
+2021-05-06 08:40:50.329 -04:00 [INF] Sysmon removed from WIN10-1
+2021-05-06 08:41:11.100 -04:00 [INF] Sysmon removed from WIN10-1
+2021-05-06 08:41:35.229 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 08:41:36.921 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 08:41:57.624 -04:00 [INF] Sysmon removed from WIN10-1
+2021-05-06 08:43:31.848 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 08:43:35.110 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 08:43:39.199 -04:00 [INF] Sysmon executable pushed to WIN10-1
+2021-05-06 08:51:00.304 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 08:51:03.332 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-06 08:51:10.313 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 08:51:35.400 -04:00 [INF] Sysmon installed on WIN10-1
+2021-05-06 08:51:53.420 -04:00 [INF] Sysmon installed on WIN10-1
+2021-05-06 09:00:36.220 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:00:37.890 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:00:44.544 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-06 09:00:45.734 -04:00 [INF] Pushing config_silent.xml to WIN10-1
+2021-05-06 09:08:52.745 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:08:54.105 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:27:20.868 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:27:23.870 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:27:23.871 -04:00 [INF] SERVER Passed Ping Check
+2021-05-06 09:28:09.228 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:28:17.824 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:28:27.537 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:28:29.627 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:28:33.746 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:28:52.357 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:28:55.090 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-06 09:28:55.254 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:28:58.103 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-06 09:28:59.817 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-06 09:29:02.603 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-06 09:33:55.930 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-06 09:33:57.354 -04:00 [INF] WIN10-1 Passed Ping Check
