@@ -158,9 +158,9 @@ Because SysmonConfigPusher uses a privileged account, it's a good idea to monito
 
 - 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
 - 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
-- 4688 Process Creation Event:
+- 4688 Process Creation Event 1:
 ```xml
- <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserSid">S-1-5-20</Data> 
   <Data Name="SubjectUserName">SERVER$</Data> 
   <Data Name="SubjectDomainName">LARESCF</Data> 
   <Data Name="SubjectLogonId">0x3e4</Data> 
@@ -176,5 +176,264 @@ Because SysmonConfigPusher uses a privileged account, it's a good idea to monito
   <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
   <Data Name="MandatoryLabel">S-1-16-12288</Data> 
 ```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x550fcef</Data> 
+  <Data Name="NewProcessId">0xa6c</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x12ac</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
 
+A Parent or Creator Process of WmiPrvSE.exe is common among all the commands issued by SysmonConfigPusher - the Creator Subject Security ID will be of the NETWORK SERVICE account and the Target Subject Account Name will be the service account used to run SysmonConfigPusher
 
+## Push Newst Executable From Sysinternals
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event 1:
+```xml
+<Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0x1a30</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">PowerShell -WindowStyle Hidden -Command "Invoke-WebRequest -UseBasicParsing -Uri http://live.sysinternals.com/Sysmon.exe -OutFile C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x5520955</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x5520955</Data> 
+  <Data Name="NewProcessId">0x15c4</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x1a30</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+
+## Install Sysmon on Selected Computers
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event 1:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-18</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e7</Data> 
+  <Data Name="NewProcessId">0x180</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\sppsvc.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x208</Data> 
+  <Data Name="CommandLine">C:\Windows\system32\sppsvc.exe</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">SERVER$</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x3e4</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\services.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-16384</Data> 
+```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0x8c8</Data> 
+  <Data Name="NewProcessName">C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">C:\SysmonFiles\Sysmon.exe -accepteula -i</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x555b61a</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+-4688 Process Creation Event 3:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x555b61a</Data> 
+  <Data Name="NewProcessId">0x6c8</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x8c8</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+- 4688 Process Creation Event 4:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x555b61a</Data> 
+  <Data Name="NewProcessId">0x1114</Data> 
+  <Data Name="NewProcessName">C:\Users\ADMINI~1\AppData\Local\Temp\Sysmon.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x8c8</Data> 
+  <Data Name="CommandLine">C:\SysmonFiles\Sysmon.exe -accepteula -i</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+
+- Note: You will also see process creation events with wevtutil and services.exe - these are the same events that get logged when a Sysmon installation occurs
+
+## Push Configs
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event 1:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0xf6c</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">PowerShell -WindowStyle Hidden -Command "Invoke-WebRequest -UseBasicParsing -Uri http://192.168.1.134/config_silent.xml -OutFile C:\SysmonFiles\config_silent.xml</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x5569039</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x5520955</Data> 
+  <Data Name="NewProcessId">0x15c4</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x1a30</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+## Update Config on Selected Computers
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event 1:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0x1258</Data> 
+  <Data Name="NewProcessName">C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">C:\SysmonFiles\Sysmon.exe -c config_silent.xml</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x556dbef</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x5520955</Data> 
+  <Data Name="NewProcessId">0x15c4</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x1a30</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+## Uninstall Sysmon from Selected Computers
+
+- 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
+- 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
+- 4688 Process Creation Event 1:
+```xml
+  <Data Name="SubjectUserSid">S-1-5-20</Data> 
+  <Data Name="SubjectUserName">SERVER$</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x3e4</Data> 
+  <Data Name="NewProcessId">0xe58</Data> 
+  <Data Name="NewProcessName">C:\SysmonFiles\Sysmon.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xb0c</Data> 
+  <Data Name="CommandLine">C:\SysmonFiles\Sysmon.exe -u</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">Administrator</Data> 
+  <Data Name="TargetDomainName">LARESCF</Data> 
+  <Data Name="TargetLogonId">0x5571bd3</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\wbem\WmiPrvSE.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
+- 4688 Process Creation Event 2: 
+```xml
+  <Data Name="SubjectUserSid">S-1-5-21-718865306-1039695286-1856044604-500</Data> 
+  <Data Name="SubjectUserName">Administrator</Data> 
+  <Data Name="SubjectDomainName">LARESCF</Data> 
+  <Data Name="SubjectLogonId">0x5520955</Data> 
+  <Data Name="NewProcessId">0x15c4</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\conhost.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0x1a30</Data> 
+  <Data Name="CommandLine">\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1</Data> 
+  <Data Name="TargetUserSid">S-1-0-0</Data> 
+  <Data Name="TargetUserName">-</Data> 
+  <Data Name="TargetDomainName">-</Data> 
+  <Data Name="TargetLogonId">0x0</Data> 
+  <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="MandatoryLabel">S-1-16-12288</Data> 
+```
