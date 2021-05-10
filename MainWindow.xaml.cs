@@ -20,6 +20,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Collections;
+using System.ComponentModel;
 
 namespace SysmonConfigPusher
 
@@ -32,12 +33,13 @@ namespace SysmonConfigPusher
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+
     {
         //private object result;
         public MainWindow()
         {
             //This sets up logging - logs to SysmonConfigPusher.log, to log other things: Log.Information("stuff")
-            InitializeComponent();
+            //InitializeComponent();
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File("SysmonConfigPusher.log", rollingInterval: RollingInterval.Month)
@@ -133,21 +135,17 @@ namespace SysmonConfigPusher
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
-            
             //Need better logic for handling duplicates here
             SelectedComputerList.Items.Clear();
-            
-            
+
             //Put the computers the user selected in the GUI into a variable
             var SelectedComputers = ComputerList.SelectedItems;
 
             //Set parallel options
             int computercount = ((IList)SelectedComputers).Count;
-            var options = new ParallelOptions { MaxDegreeOfParallelism = computercount };
-            ProgressBar.Maximum = computercount;
-            
+            var options = new ParallelOptions { MaxDegreeOfParallelism = 1000 };
 
-            //Need to put the list of computers into a blocking collection
+            //Need to put the list of computers into a blocking collection for parallel for each
             BlockingCollection<string> SelectedComputersCollection = new BlockingCollection<string>();
 
             //Loop through the list of selected computers and add them to the new blocking list
@@ -157,31 +155,55 @@ namespace SysmonConfigPusher
             }
 
             // Looping through the computers that are in the domain or populated via a text file - this logic performs a ping check on the computers and adds them to the middle computers you want to action listbox, these are the computers that will have various commands issued to them
-            Object countLock = new Object();
-            Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer=>
-            //foreach (object SelectedComputer in SelectedComputers)
+
+            //REF: http://hk.uwenku.com/question/p-dyussklc-gg.html (sketchy site)
+
+
+            int pingtimeout = 5;
+
+            int current = 0;
+            myprogressDialog.Maximum = computercount;
+            int percentcomplete = 0;
+
+
+            Task looper = new Task(() =>
             {
-                // Want to test for a ping response before adding the computer to the list, if it passed the ping check, add it to the listbox, if it does not pass the ping check, don't add it to the listbox and log it 
-                // This part is very slow, I tried playing with ping options like buffer, ttl and timeouts with no noticeable impact, this part needs optimization for large computer lists
-                try
-                {
-                    Ping pingSender = new Ping();
-                    PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString());
-                    if (ComputerPingReply.Status == IPStatus.Success)
+
+                Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer =>
+
+                //foreach (object SelectedComputer in SelectedComputers) -- this is the old for loop, leaving here just in case
+                { 
+                    Dispatcher.Invoke(async () =>
                     {
-                        SelectedComputerList.Items.Add(SelectedComputer);
-                        Log.Information(SelectedComputer + " Passed Ping Check");
-                    }
-                    else
-                    {
-                        Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
-                    }
-                }
-                catch (Exception pingexception)
-                {
-                    Log.Information(pingexception.Message);
-                }
-            });
+                        //This stuff updates the progress bar, needs a bit of work
+                        percentcomplete = (current / computercount) * 100;
+                        myprogressDialog.Value = percentcomplete;
+                        current++;
+                        try
+                        {
+                            Ping pingSender = new Ping();
+                            //PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString(), pingtimeout); -- this is the old single threaded ping, leaving here just in case
+                            PingReply ComputerPingReply = await pingSender.SendPingAsync(SelectedComputer.ToString(),pingtimeout);
+                            if (ComputerPingReply.Status == IPStatus.Success)
+                            {
+                                myprogressDialog.Value = current;
+                                SelectedComputerList.Items.Add(SelectedComputer);
+                                Log.Information(SelectedComputer + " Passed Ping Check");
+                            }
+                            else
+                            { 
+                                myprogressDialog.Value = current;
+                                Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
+                            }
+                        }
+                        catch (Exception pingexception)
+                        {
+                            Log.Information(pingexception.Message);
+                        }
+                    });
+                });
+            }); // closing brackets for the Task         
+            looper.Start();
         }
 
         // This stuff happens when you click the "Push Configs" Button
@@ -220,8 +242,6 @@ namespace SysmonConfigPusher
                 return;
             }
 
-
-        
             //RegEx: ([^\\]*)$
 
             Regex ConfigToDeployRegEx = new Regex(@"([^\\]*)$");
@@ -259,6 +279,7 @@ namespace SysmonConfigPusher
         private void ClearSelectedComputers_Click(object sender, RoutedEventArgs e)
         {
             SelectedComputerList.Items.Clear();
+            myprogressDialog.Value = 0;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

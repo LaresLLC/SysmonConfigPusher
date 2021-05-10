@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SysmonConfigPusher"
         mc:Ignorable="d"
-        Title="Sysmon Config Pusher" Height="873.689" Width="1176.267" WindowState="Normal">
+        Title="Sysmon Config Pusher" Height="899.289" Width="1176.267" WindowState="Normal">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
@@ -59,7 +59,7 @@
             </Separator.RenderTransform>
         </Separator>
         <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Click="Button_Click_4" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="22" Margin="149.6,150,0,0" VerticalAlignment="Top" Width="506" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
+        <ProgressBar x:Name="myprogressDialog" HorizontalAlignment="Left" Height="22" Margin="149.6,150,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
 
     </Grid>
 </Window>
