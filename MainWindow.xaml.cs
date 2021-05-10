@@ -17,7 +17,9 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using Serilog;
 using System.Diagnostics.Eventing.Reader;
-
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using System.Collections;
 
 namespace SysmonConfigPusher
 
@@ -31,24 +33,17 @@ namespace SysmonConfigPusher
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-
         //private object result;
-
         public MainWindow()
         {
             //This sets up logging - logs to SysmonConfigPusher.log, to log other things: Log.Information("stuff")
-
             InitializeComponent();
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File("SysmonConfigPusher.log", rollingInterval: RollingInterval.Month)
             .CreateLogger();
-
         }
-
         public object Controls { get; private set; }
-
         // Stuff that happens when you click the "Get Domain Computers" Button
         public void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +56,6 @@ namespace SysmonConfigPusher
             }
             
         }
-
         private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             //No actions here for when list box is changed, don't delete 
@@ -74,10 +68,8 @@ namespace SysmonConfigPusher
             List<string> computerNames = new List<string>();
 
             //Get the DomainName from the config file, needs to be a FQDN
-            string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");
-            
+            string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");         
             using (DirectoryEntry entry = new DirectoryEntry("LDAP://"+configDomainName))
-            
             {
                 using (DirectorySearcher mySearcher = new DirectorySearcher(entry))
                 {
@@ -95,17 +87,28 @@ namespace SysmonConfigPusher
 
                     // Doing a quick ping check on the domain to see if it's alive
                     Ping pingSender = new Ping();
-                    PingReply reply = pingSender.Send(configDomainName);
-                    
-                    if (reply.Status == IPStatus.Success)
+                    try
                     {
-                        Log.Information("Domain Ping Check Complete for " + configDomainName);
+                        PingReply reply = pingSender.Send(configDomainName);
+                        if (reply.Status == IPStatus.Success)
+                        {
+                            Log.Information("Domain Ping Check Complete for " + configDomainName);
+                        }
+                        else
+                        {
+                            System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
+                            Log.Information("Failed Domain Ping Check for " + configDomainName);
+                        }
                     }
-                    else
+
+                    catch (Exception domainpingexception)
                     {
                         System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
-                        Log.Information("Failed Domain Ping Check for " + configDomainName);
+                        Log.Information(domainpingexception.Message);
                     }
+                    
+                    
+                    
                     
                     foreach (SearchResult resEnt in mySearcher.FindAll())
                     {
@@ -125,24 +128,44 @@ namespace SysmonConfigPusher
 
         // This takes the selected items from the "ComputerList" ListBox, loops through them and puts them into another ListBox named "SelectedComputerList" - we want to perform whatever actions we need on this list
 
+
+
+
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
             
             //Need better logic for handling duplicates here
             SelectedComputerList.Items.Clear();
-            Ping pingSender = new Ping();
+            
+            
+            //Put the computers the user selected in the GUI into a variable
+            var SelectedComputers = ComputerList.SelectedItems;
+
+            //Set parallel options
+            int computercount = ((IList)SelectedComputers).Count;
+            var options = new ParallelOptions { MaxDegreeOfParallelism = computercount };
+            ProgressBar.Maximum = computercount;
             
 
+            //Need to put the list of computers into a blocking collection
+            BlockingCollection<string> SelectedComputersCollection = new BlockingCollection<string>();
 
-            var SelectedComputers = ComputerList.SelectedItems;
-            // Looping through the computers that are in the domain or populated via a text file - this logic performs a ping check on the computers and adds them to the middle computers you want to action listbox, these are the computers that will have various commands issued to them
-            foreach (object SelectedComputer in SelectedComputers)
+            //Loop through the list of selected computers and add them to the new blocking list
+            foreach(object SelectedComputer in SelectedComputers)
             {
-                
+                SelectedComputersCollection.Add((string)SelectedComputer);
+            }
+
+            // Looping through the computers that are in the domain or populated via a text file - this logic performs a ping check on the computers and adds them to the middle computers you want to action listbox, these are the computers that will have various commands issued to them
+            Object countLock = new Object();
+            Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer=>
+            //foreach (object SelectedComputer in SelectedComputers)
+            {
                 // Want to test for a ping response before adding the computer to the list, if it passed the ping check, add it to the listbox, if it does not pass the ping check, don't add it to the listbox and log it 
                 // This part is very slow, I tried playing with ping options like buffer, ttl and timeouts with no noticeable impact, this part needs optimization for large computer lists
                 try
                 {
+                    Ping pingSender = new Ping();
                     PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString());
                     if (ComputerPingReply.Status == IPStatus.Success)
                     {
@@ -158,7 +181,7 @@ namespace SysmonConfigPusher
                 {
                     Log.Information(pingexception.Message);
                 }
-            }
+            });
         }
 
         // This stuff happens when you click the "Push Configs" Button
@@ -522,6 +545,11 @@ namespace SysmonConfigPusher
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             ComputerList.SelectAll();
+        }
+
+        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }

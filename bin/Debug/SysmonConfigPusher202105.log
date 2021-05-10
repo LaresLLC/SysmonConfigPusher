@@ -1,175 +1,124 @@
-2021-05-06 12:23:05.623 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:23:05.649 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:23:05.650 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:23:07.104 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:23:08.601 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:23:10.098 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:23:11.590 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:23:13.101 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:23:15.372 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:17.639 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:19.907 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:22.181 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:24.460 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:26.723 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:29.011 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:31.283 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:33.560 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:35.833 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:38.093 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:40.353 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:42.622 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:23:44.890 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:05.863 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 12:37:15.321 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:37:15.323 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:37:15.323 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:37:16.595 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:37:18.099 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:37:19.595 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:37:21.093 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:37:22.600 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:37:25.140 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:27.469 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:29.778 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:32.088 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:34.432 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:36.744 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:39.058 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:41.366 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:43.677 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:46.009 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:48.335 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:50.681 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:52.990 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:37:55.338 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:38:31.997 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 12:38:34.919 -04:00 [INF] SERVER Passed Ping Check
-2021-05-06 12:38:34.920 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 12:38:36.092 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:39:13.734 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 12:39:19.050 -04:00 [INF] SERVER Passed Ping Check
-2021-05-06 12:39:19.051 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 12:39:21.602 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:32.387 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:44:32.413 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:44:32.413 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:44:32.589 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:33.089 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:33.601 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:34.103 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:34.589 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:44:36.943 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:39.243 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:41.539 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:43.840 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:46.141 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:48.430 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:50.727 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:53.025 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:55.325 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:57.612 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:44:59.910 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:45:02.218 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:45:04.518 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:45:06.806 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:24.022 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:46:24.050 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:46:24.051 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:46:24.089 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:46:24.589 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:46:25.098 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:46:25.598 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:46:26.104 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:46:28.415 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:30.713 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:33.014 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:35.319 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:37.615 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:39.914 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:42.223 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:44.525 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:46.815 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:49.123 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:51.430 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:53.733 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:56.037 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:46:58.334 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:13.147 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 12:47:25.483 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:47:25.484 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:47:25.485 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:47:25.589 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:47:26.089 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:47:26.598 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:47:27.102 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:47:27.589 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:47:29.920 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:32.219 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:34.516 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:36.824 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:39.127 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:41.409 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:43.720 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:46.032 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:48.322 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:50.634 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:52.923 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:55.217 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:57.514 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:47:59.808 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:23.710 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:50:23.734 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:50:23.734 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:50:24.089 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:50:24.589 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:50:25.091 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:50:25.597 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:50:26.104 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:50:28.422 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:30.779 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:33.081 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:35.399 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:37.724 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:40.016 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:42.309 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:44.606 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:46.900 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:49.203 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:51.492 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:53.802 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:56.092 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:50:58.385 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:23.900 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:51:23.923 -04:00 [INF] server Passed Ping Check
-2021-05-06 12:51:23.923 -04:00 [INF] win10-1 Passed Ping Check
-2021-05-06 12:51:24.089 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:51:24.591 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:51:25.095 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:51:25.598 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:51:26.099 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
-2021-05-06 12:51:28.431 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:30.722 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:33.011 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:35.337 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:37.632 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:39.928 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:42.222 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:44.528 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:46.829 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:49.127 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:51.419 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:53.717 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:56.005 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 12:51:58.317 -04:00 [INF] An exception occurred during a Ping request.
-2021-05-06 13:10:31.928 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 13:10:33.595 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 13:10:41.095 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 13:10:47.091 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 13:10:47.092 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 13:18:04.420 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 13:18:11.851 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 13:18:13.104 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
-2021-05-06 13:18:17.199 -04:00 [INF] Domain Ping Check Complete for larescf.local
-2021-05-06 13:18:23.520 -04:00 [INF] WIN10-1 Passed Ping Check
-2021-05-06 13:18:26.097 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 08:59:59.973 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-10 09:00:02.600 -04:00 [INF] SERVER Passed Ping Check
+2021-05-10 09:00:02.626 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:00:03.990 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:49.462 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:00:49.462 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:00:49.462 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-10 09:00:50.985 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:52.492 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:52.493 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:53.484 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:53.984 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:00:54.231 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:54.777 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:54.857 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:55.747 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:55.807 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:56.268 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:56.539 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:57.084 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:57.207 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:57.742 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:58.055 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:58.588 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:59.429 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:00:59.540 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:01:57.533 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:01:57.532 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:01:57.533 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-10 09:01:58.990 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:01:58.990 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:01:58.990 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:02:00.001 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:02:00.485 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:02:01.261 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:01.272 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:02.320 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:02.324 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:02.829 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:03.283 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:03.565 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:03.584 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:04.272 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:04.624 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:04.624 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:05.139 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:05.845 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:02:05.864 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:03:46.882 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-10 09:03:51.554 -04:00 [INF] SERVER Passed Ping Check
+2021-05-10 09:03:51.588 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:03:52.992 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:03:55.965 -04:00 [INF] SERVER Passed Ping Check
+2021-05-10 09:03:55.979 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:03:58.480 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:11.994 -04:00 [INF] SERVER Passed Ping Check
+2021-05-10 09:04:12.022 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:12.024 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:12.034 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:12.041 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:13.487 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:13.487 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:14.481 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:14.985 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:14.987 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:15.768 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:16.286 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:16.756 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:16.982 -04:00 [INF] WIN10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:17.265 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:17.265 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:17.780 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:18.046 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:18.577 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:19.045 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:19.308 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:19.550 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:19.557 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:20.048 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:21.851 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:34.719 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-10 09:04:34.739 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:34.755 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:37.019 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:37.035 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:37.480 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:37.480 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:37.480 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:37.481 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:37.481 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:38.008 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.014 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.299 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.315 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.782 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.787 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.794 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.794 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:39.826 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:40.283 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:41.015 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:41.295 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:52.912 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-10 09:04:52.947 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:52.953 -04:00 [INF] The calling thread cannot access this object because a different thread owns it.
+2021-05-10 09:04:55.201 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:55.223 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:55.234 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:55.241 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:55.250 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:55.487 -04:00 [INF] win10-3 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:55.487 -04:00 [INF] win10-5 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:55.488 -04:00 [INF] win10-4 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:55.488 -04:00 [INF] win10-6 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:55.489 -04:00 [INF] win10-2 Did not pass the Ping Check and was not added to the list
+2021-05-10 09:04:56.217 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.191 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.477 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.508 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.541 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.542 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.542 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.798 -04:00 [INF] An exception occurred during a Ping request.
+2021-05-10 09:04:57.816 -04:00 [INF] An exception occurred during a Ping request.
