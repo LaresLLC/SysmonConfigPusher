@@ -20,15 +20,11 @@ using System.Diagnostics.Eventing.Reader;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Collections;
-using System.ComponentModel;
+
 
 namespace SysmonConfigPusher
 
 {
-
-
-
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -43,7 +39,7 @@ namespace SysmonConfigPusher
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File("SysmonConfigPusher.log", rollingInterval: RollingInterval.Month)
-            .CreateLogger();
+            .CreateLogger();   
         }
         public object Controls { get; private set; }
         // Stuff that happens when you click the "Get Domain Computers" Button
@@ -66,9 +62,7 @@ namespace SysmonConfigPusher
         // This part gets the list of computers from the domain
         public static List<string> GetComputers()
         {
-
             List<string> computerNames = new List<string>();
-
             //Get the DomainName from the config file, needs to be a FQDN
             string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");         
             using (DirectoryEntry entry = new DirectoryEntry("LDAP://"+configDomainName))
@@ -76,17 +70,13 @@ namespace SysmonConfigPusher
                 using (DirectorySearcher mySearcher = new DirectorySearcher(entry))
                 {
                     mySearcher.Filter = ("(objectClass=computer)");
-
                     // No size limit, reads all objects
                     mySearcher.SizeLimit = 0;
-
                     // Read data in pages of 250 objects. Make sure this value is below the limit configured in your AD domain (if there is a limit)
                     mySearcher.PageSize = 250;
-
                     // Let searcher know which properties are going to be used, and only load those
                     mySearcher.PropertiesToLoad.Add("name");
                     //Ref: https://stackoverflow.com/questions/4094682/c-sharp-check-domain-is-live
-
                     // Doing a quick ping check on the domain to see if it's alive
                     Ping pingSender = new Ping();
                     try
@@ -108,10 +98,6 @@ namespace SysmonConfigPusher
                         System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
                         Log.Information(domainpingexception.Message);
                     }
-                    
-                    
-                    
-                    
                     foreach (SearchResult resEnt in mySearcher.FindAll())
                     {
                         // Note: Properties can contain multiple values.
@@ -123,15 +109,9 @@ namespace SysmonConfigPusher
                     }
                 }
             }
-
             return computerNames;
-
         }
-
         // This takes the selected items from the "ComputerList" ListBox, loops through them and puts them into another ListBox named "SelectedComputerList" - we want to perform whatever actions we need on this list
-
-
-
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
@@ -143,7 +123,7 @@ namespace SysmonConfigPusher
 
             //Set parallel options
             int computercount = ((IList)SelectedComputers).Count;
-            var options = new ParallelOptions { MaxDegreeOfParallelism = 1000 };
+            var options = new ParallelOptions { MaxDegreeOfParallelism = 100 };
 
             //Need to put the list of computers into a blocking collection for parallel for each
             BlockingCollection<string> SelectedComputersCollection = new BlockingCollection<string>();
@@ -159,65 +139,66 @@ namespace SysmonConfigPusher
             //REF: http://hk.uwenku.com/question/p-dyussklc-gg.html (sketchy site)
 
 
+            //Setting the value for ping timeout, 5000ms 
             int pingtimeout = 5000;
-
+            //Setting the current variable to 0, this is used for the progress bar
             int current = 0;
+            //Setting the max value of the progress bar equtal to the amount of computers 
             myprogressDialog.Maximum = computercount;
+            //initailizing the percentcomplete variable, used for the progress bar
             int percentcomplete = 0;
-
-
+            
+            //Start the task for the foreach loop, this loops through a list of computers and adds only the live ones
             Task looper = new Task(() =>
             {
-
                 Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer =>
-
                 //foreach (object SelectedComputer in SelectedComputers) -- this is the old for loop, leaving here just in case
                 {
-                    
-
+                    //Need to use the Dispatcher method to update GUI
                     Dispatcher.Invoke(async () =>
                     {
                         StatusLabel.Content = "Working...";
+                       
                         //This stuff updates the progress bar, needs a bit of work
-
                         current++;
                         percentcomplete = (current / computercount) * 100;
                         myprogressDialog.Value = percentcomplete;
-                        
                         // End of progress bar update
 
+                        // Within the loop, try, catch - try the pings and log successes, if it fails log the error message
+
+                        Ping pingSender = new Ping();
+                        //PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString(), pingtimeout); -- this is the old single threaded ping, leaving here just in case                     
                         try
-                        {
-                            Ping pingSender = new Ping();
-                            //PingReply ComputerPingReply = pingSender.Send(SelectedComputer.ToString(), pingtimeout); -- this is the old single threaded ping, leaving here just in case
-                            PingReply ComputerPingReply = await pingSender.SendPingAsync(SelectedComputer.ToString(),pingtimeout);
+                        {                          
+                            PingReply ComputerPingReply = await pingSender.SendPingAsync(SelectedComputer.ToString(), pingtimeout);
                             if (ComputerPingReply.Status == IPStatus.Success)
                             {
                                 myprogressDialog.Value = current;
                                 SelectedComputerList.Items.Add(SelectedComputer);
                                 Log.Information(SelectedComputer + " Passed Ping Check");
                             }
-                            else
+                            if (ComputerPingReply.Status == IPStatus.DestinationHostUnreachable)
                             { 
                                 myprogressDialog.Value = current;
-                                Log.Information(SelectedComputer + " Did not pass the Ping Check and was not added to the list");
+                                Log.Information(SelectedComputer + " Was Unreachable");
                             }
                         }
                         catch (Exception pingexception)
                         {
-                            Log.Information(pingexception.Message);
+                            Log.Information(SelectedComputer + ":" + pingexception.InnerException.Message);
                         }
-                    } );
+                    });
                 } );
-            } ); // closing brackets for the Task         
+            } ); // closing brackets for the Task
+            //Start our looper task
             looper.Start();
+            //When the task is done, update the status label and dispose of the task
             looper.GetAwaiter().OnCompleted(() =>
             {
                 StatusLabel.Content = "Done!";
+                looper.Dispose();   
             } );
-
-
-
         }
 
         // This stuff happens when you click the "Push Configs" Button
@@ -302,29 +283,32 @@ namespace SysmonConfigPusher
         }
 
         // This is stuff that happens when you click the Start WebServer button
-        private void StartWebServer_Click(object sender, RoutedEventArgs e)
+        public void StartWebServer_Click(object sender, RoutedEventArgs e)
         {
-            // Getting values from the configuration of the IP address of the web server as well as where the local bank of Sysmon configuration files are 
-            string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
-            string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
+            Dispatcher.Invoke(() => {
+                // Getting values from the configuration of the IP address of the web server as well as where the local bank of Sysmon configuration files are 
+                string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
+                string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
 
-            WebServerLabel.Content = "Web Server Stopped";
+                WebServerLabel.Content = "Web Server Stopped";
 
-            var tcs = new CancellationTokenSource();
-            var config = new ServerConfig()
-                .AddLogger(new CLFStdOut())
-                //This is the directory where the local Sysmon files live, these will be pushed to the user-selected systems
-                
-                .AddRoute(new FileHandler(configSysmonConfigLocation));
-            var task = HttpServer.ListenAsync(
-                new IPEndPoint(IPAddress.Any, 80),
-                false,
-                config,
-                tcs.Token
-            );
-            WebServerLabel.Content = "Web Server Started";
-            Log.Information("Web Server Started on " + configWebServerIP + ", serving configs from " + configSysmonConfigLocation);
+                var tcs = new CancellationTokenSource();
+                var config = new ServerConfig()
+                    .AddLogger(new CLFStdOut())
+                    //This is the directory where the local Sysmon files live, these will be pushed to the user-selected systems
 
+                    .AddRoute(new FileHandler(configSysmonConfigLocation));
+                var webservertask = HttpServer.ListenAsync(
+                    new IPEndPoint(IPAddress.Any, 80),
+                    false,
+                    config,
+                    tcs.Token
+                );
+
+                WebServerLabel.Content = "Web Server Started";
+                Log.Information("Web Server Started on " + configWebServerIP + ", serving configs from " + configSysmonConfigLocation);
+                return Task.CompletedTask;
+            });
         }
 
         //This is what happens when you click the "Load Configs" button
@@ -590,8 +574,6 @@ namespace SysmonConfigPusher
         {
             System.Windows.Forms.Application.Restart();
             Environment.Exit(0);
-
-
         }
     }
 }
