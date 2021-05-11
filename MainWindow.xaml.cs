@@ -159,7 +159,7 @@ namespace SysmonConfigPusher
             //REF: http://hk.uwenku.com/question/p-dyussklc-gg.html (sketchy site)
 
 
-            int pingtimeout = 5;
+            int pingtimeout = 5000;
 
             int current = 0;
             myprogressDialog.Maximum = computercount;
@@ -172,13 +172,20 @@ namespace SysmonConfigPusher
                 Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer =>
 
                 //foreach (object SelectedComputer in SelectedComputers) -- this is the old for loop, leaving here just in case
-                { 
+                {
+                    
+
                     Dispatcher.Invoke(async () =>
                     {
+                        StatusLabel.Content = "Working...";
                         //This stuff updates the progress bar, needs a bit of work
+
+                        current++;
                         percentcomplete = (current / computercount) * 100;
                         myprogressDialog.Value = percentcomplete;
-                        current++;
+                        
+                        // End of progress bar update
+
                         try
                         {
                             Ping pingSender = new Ping();
@@ -200,10 +207,17 @@ namespace SysmonConfigPusher
                         {
                             Log.Information(pingexception.Message);
                         }
-                    });
-                });
-            }); // closing brackets for the Task         
+                    } );
+                } );
+            } ); // closing brackets for the Task         
             looper.Start();
+            looper.GetAwaiter().OnCompleted(() =>
+            {
+                StatusLabel.Content = "Done!";
+            } );
+
+
+
         }
 
         // This stuff happens when you click the "Push Configs" Button
@@ -450,7 +464,6 @@ namespace SysmonConfigPusher
             {
                 System.Windows.MessageBox.Show("Please Select a Computer");
                 return;
-
             }
             System.Collections.IList
             //This grabs the selected computer variable
@@ -570,6 +583,14 @@ namespace SysmonConfigPusher
 
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.Application.Restart();
+            Environment.Exit(0);
+
 
         }
     }

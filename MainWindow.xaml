@@ -59,7 +59,9 @@
             </Separator.RenderTransform>
         </Separator>
         <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Click="Button_Click_4" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="myprogressDialog" HorizontalAlignment="Left" Height="22" Margin="149.6,150,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
+        <ProgressBar x:Name="myprogressDialog" HorizontalAlignment="Left" Height="20" Margin="150.6,164,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
+        <Label x:Name="StatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="415.6,150,0,0" VerticalAlignment="Top" Height="49" Width="240"/>
+        <Button x:Name="RestartButton" Content="Restart&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Left" Margin="304.6,403.2,-144.4,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="RestartButton_Click" Height="21" BorderBrush="#FFFF0404" Background="#FFCB9393" OpacityMask="#FF9F7777"/>
 
     </Grid>
 </Window>
