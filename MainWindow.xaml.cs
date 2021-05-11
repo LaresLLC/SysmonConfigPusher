@@ -1,4 +1,22 @@
-﻿using System;
+﻿//   _______ __   __ _______ __   __ _______ __    _ _______ _______ __    _ _______ ___ _______ _______ __   __ _______ __   __ _______ ______   
+//  |       |  | |  |       |  |_|  |       |  |  | |       |       |  |  | |       |   |       |       |  | |  |       |  | |  |       |    _ |  
+//  |  _____|  |_|  |  _____|       |   _   |   |_| |       |   _   |   |_| |    ___|   |    ___|    _  |  | |  |  _____|  |_|  |    ___|   | ||  
+//  | |_____|       | |_____|       |  | |  |       |       |  | |  |       |   |___|   |   | __|   |_| |  |_|  | |_____|       |   |___|   |_||_ 
+//  |_____  |_     _|_____  |       |  |_|  |  _    |      _|  |_|  |  _    |    ___|   |   ||  |    ___|       |_____  |       |    ___|    __  |
+//   _____| | |   |  _____| | ||_|| |       | | |   |     |_|       | | |   |   |   |   |   |_| |   |   |       |_____| |   _   |   |___|   |  | |
+//  |_______| |___| |_______|_|   |_|_______|_|  |__|_______|_______|_|  |__|___|   |___|_______|___|   |_______|_______|__| |__|_______|___|  |_|
+//     _     _   
+//    (c).-.(c)  
+//     / ._. \   
+//   __\( Y )/__ 
+//  (_.-/'-'\-._)
+//    || SCP ||   
+//   _.' `-' '._ 
+//  (.-./`-`\.-.)
+//   `-'     `-' 
+
+
+using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Windows;
@@ -34,8 +52,7 @@ namespace SysmonConfigPusher
         //private object result;
         public MainWindow()
         {
-            //This sets up logging - logs to SysmonConfigPusher.log, to log other things: Log.Information("stuff")
-            //InitializeComponent();
+            // This sets up logging - logs to SysmonConfigPusher.log, to log other things: Log.Information("stuff")
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File("SysmonConfigPusher.log", rollingInterval: RollingInterval.Month)
@@ -48,11 +65,11 @@ namespace SysmonConfigPusher
             List<String> ComputerNames = GetComputers();
             // Clear the values in case the button is clicked twice
             ComputerList.Items.Clear();
+            // Get list of computers for the domain and add them to the listbox
             foreach (object Computer in ComputerNames)
             {
                 ComputerList.Items.Add(Computer);
-            }
-            
+            }            
         }
         private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -84,10 +101,12 @@ namespace SysmonConfigPusher
                         PingReply reply = pingSender.Send(configDomainName);
                         if (reply.Status == IPStatus.Success)
                         {
+                            // If the ping is successful, log it
                             Log.Information("Domain Ping Check Complete for " + configDomainName);
                         }
                         else
                         {
+                            // If ping failes, pop up a message box and log it
                             System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
                             Log.Information("Failed Domain Ping Check for " + configDomainName);
                         }
@@ -95,9 +114,11 @@ namespace SysmonConfigPusher
 
                     catch (Exception domainpingexception)
                     {
+                        // Catch the exception and log it when there is something wrong with the domain ping
                         System.Windows.MessageBox.Show("Error Contacting Domain, Please Check Config Settings and Log File for More Information");
                         Log.Information(domainpingexception.Message);
                     }
+                    // Loop through computers in the domai and add them, we populate the listbox with the code above
                     foreach (SearchResult resEnt in mySearcher.FindAll())
                     {
                         // Note: Properties can contain multiple values.
@@ -115,25 +136,26 @@ namespace SysmonConfigPusher
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
+            // If we click on select computers with no actual computers selected pop up a message box since the GUI is a bit confusing
             if (ComputerList.SelectedIndex < 0)
             {
                 System.Windows.MessageBox.Show("Please Select a Computer from the Live Computers in Domain List");
                 return;
             }
-            //Need better logic for handling duplicates here
+            // Need better logic for handling duplicates here
             SelectedComputerList.Items.Clear();
 
-            //Put the computers the user selected in the GUI into a variable
+            // Put the computers the user selected in the GUI into a variable
             var SelectedComputers = ComputerList.SelectedItems;
 
-            //Set parallel options
+            // Set parallel options
             int computercount = ((IList)SelectedComputers).Count;
             var options = new ParallelOptions { MaxDegreeOfParallelism = 100 };
 
-            //Need to put the list of computers into a blocking collection for parallel for each
+            // Need to put the list of computers into a blocking collection for parallel for each
             BlockingCollection<string> SelectedComputersCollection = new BlockingCollection<string>();
 
-            //Loop through the list of selected computers and add them to the new blocking list
+            // Loop through the list of selected computers and add them to the new blocking list
             foreach(object SelectedComputer in SelectedComputers)
             {
                 SelectedComputersCollection.Add((string)SelectedComputer);
@@ -144,27 +166,27 @@ namespace SysmonConfigPusher
             //REF: http://hk.uwenku.com/question/p-dyussklc-gg.html (sketchy site)
 
 
-            //Setting the value for ping timeout, 5000ms 
+            // Setting the value for ping timeout, 5000ms 
             int pingtimeout = 5000;
-            //Setting the current variable to 0, this is used for the progress bar
+            // Setting the current variable to 0, this is used for the progress bar
             int current = 0;
-            //Setting the max value of the progress bar equtal to the amount of computers 
+            // Setting the max value of the progress bar equtal to the amount of computers 
             myprogressDialog.Maximum = computercount;
-            //initailizing the percentcomplete variable, used for the progress bar
+            // Initailizing the percentcomplete variable, used for the progress bar
             int percentcomplete = 0;
             
-            //Start the task for the foreach loop, this loops through a list of computers and adds only the live ones
+            // Start the task for the foreach loop, this loops through a list of computers and adds only the live ones
             Task looper = new Task(() =>
             {
                 Parallel.ForEach(SelectedComputersCollection, options, SelectedComputer =>
-                //foreach (object SelectedComputer in SelectedComputers) -- this is the old for loop, leaving here just in case
+                // foreach (object SelectedComputer in SelectedComputers) -- this is the old for loop, leaving here just in case
                 {
-                    //Need to use the Dispatcher method to update GUI
+                    // Need to use the Dispatcher method to update GUI
                     Dispatcher.Invoke(async () =>
                     {
                         StatusLabel.Content = "Working...";
                        
-                        //This stuff updates the progress bar, needs a bit of work
+                        // This stuff updates the progress bar, needs a bit of work
                         current++;
                         percentcomplete = (current / computercount) * 100;
                         myprogressDialog.Value = percentcomplete;
@@ -196,9 +218,9 @@ namespace SysmonConfigPusher
                     });
                 } );
             } ); // closing brackets for the Task
-            //Start our looper task
+            // Start our looper task
             looper.Start();
-            //When the task is done, update the status label and dispose of the task
+            // When the task is done, update the status label and dispose of the task
             looper.GetAwaiter().OnCompleted(() =>
             {
                 StatusLabel.Content = "Done!";
@@ -248,19 +270,19 @@ namespace SysmonConfigPusher
             Match MatchedSysmonConfig = ConfigToDeployRegEx.Match(selectedItem);
 
             System.Collections.IList
-            //This grabs the selected computer variable
+            // This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
-            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            // Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
                 
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
-                //Selected Sysmon Config Variable Name = FinalSysmonMatchedConfig
+                // Selected Sysmon Config Variable Name = FinalSysmonMatchedConfig
                 var FinalSysmonMatchedConfig = MatchedSysmonConfig.ToString();
 
-                //Get Web Server IP Address from config
+                // Get Web Server IP Address from config
                 string configWebServerIP = ConfigurationManager.AppSettings.Get("WebServerIP");
 
                 // This is the command ran on the remote computer, the idea here is that the remote computer runs a PowerShell Invoke-WebRequest for the config that is hosted on the host on which SysmonConfigPusher is running on
@@ -316,7 +338,7 @@ namespace SysmonConfigPusher
             });
         }
 
-        //This is what happens when you click the "Load Configs" button
+        // This is what happens when you click the "Load Configs" button
         public void LoadConfigs_Click(object sender, RoutedEventArgs e)
         {
             string configSysmonConfigLocation = ConfigurationManager.AppSettings.Get("SysmonConfigLocation");
@@ -326,11 +348,11 @@ namespace SysmonConfigPusher
             // This is the regex used to grab the tag value that you set within your Sysmon config, if you want to use a different prefix change the "SCPTAG" value here
             Regex tagregex = new Regex(@"(?<=SCPTAG\: )((?<config_tag>.*))(?=\-\-\>)");
 
-            //Needs to be in config
+            // Needs to be in config
             var sourceDirectory =  configSysmonConfigLocation;
-            //To do: add the .smc extension here as well 
+            // To do: add the .smc extension here as well 
             var SysmonConfigs = Directory.EnumerateFiles(sourceDirectory, "*.xml");
-            //We loop through the XML files of where our Sysmon configurations live, and we extract the tag value as well as the name of the config, both values get populated to the list box
+            // We loop through the XML files of where our Sysmon configurations live, and we extract the tag value as well as the name of the config, both values get populated to the list box
             foreach(string currentSysmonConfig in SysmonConfigs)
             {
                 using (StreamReader r = new StreamReader(currentSysmonConfig))
@@ -399,12 +421,12 @@ namespace SysmonConfigPusher
                 System.Windows.MessageBox.Show("Error, Select config value, not the tag");
                 return;
             }
-            //UpdateConfigs
+            // UpdateConfigs
             Regex ConfigToDeployRegEx = new Regex(@"([^\\]*)$");
             Match MatchedSysmonConfig = ConfigToDeployRegEx.Match(selectedItem);
 
             System.Collections.IList
-            //This grabs the selected computer variable
+            // This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
            
             // If there is no computer selected to update the configuration on, pop up an error and let the user try again
@@ -414,7 +436,7 @@ namespace SysmonConfigPusher
                 return;
             }
 
-            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc - this is a pretty funky loop as we are doing some validation here as well
+            // Run command on whatever computers we selected - probably need a better way to do this at some point, with multiple threads etc - this is a pretty funky loop as we are doing some validation here as well
             foreach (object SelectedComputer in ComputerSelected)
             {
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
@@ -449,10 +471,10 @@ namespace SysmonConfigPusher
                     Regex SHA256 = new Regex(@"[A-Fa-f0-9]{64}");
                     // Put the matched regex (the SHA256) hash into a variable called SHA256Value
                     Match SHA256Value = SHA256.Match(EventData);
-                    /// Another awful regex to extract the time stamp from Event ID 16 - the SHA256 value of the updated config as well as the time stamp get logged, this way you can validate that the right configuration file got pushed to the right computer
+                    // Another awful regex to extract the time stamp from Event ID 16 - the SHA256 value of the updated config as well as the time stamp get logged, this way you can validate that the right configuration file got pushed to the right computer
                     Regex LoggedEventTime = new Regex(@"\d\d\d\d\-\d\d\-\d\d.\d\d\:\d\d\:\d\d\.\d\d\d");
                     Match MatchedLoggedEventTime = LoggedEventTime.Match(EventData);
-                    //Log showing that we found an Event ID 16 on the selected remote host, and we log the time and SHA256 value of the configuration file pushed
+                    // Log showing that we found an Event ID 16 on the selected remote host, and we log the time and SHA256 value of the configuration file pushed
                     Log.Information("Found Config Update Event on " + SelectedComputer + " Logged at " + MatchedLoggedEventTime + "." + " Updated with config file with the SHA256 Hash of: " + SHA256Value.ToString());                    
                 }
             }
@@ -467,9 +489,9 @@ namespace SysmonConfigPusher
                 return;
             }
             System.Collections.IList
-            //This grabs the selected computer variable
+            // This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
-            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            // Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
@@ -506,9 +528,6 @@ namespace SysmonConfigPusher
             {
                 Log.Information(openfilesexception.Message + " - this is logged when no computer list is selected");
             }
-            
-
-     
         }
 
         // Stuff that happens when you click the uninstall Sysmon button
@@ -520,9 +539,9 @@ namespace SysmonConfigPusher
                 return;
             }
             System.Collections.IList
-            //This grabs the selected computer variable
+            // This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
-            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            // Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
@@ -544,15 +563,15 @@ namespace SysmonConfigPusher
                 return;
             }
             System.Collections.IList
-            //This grabs the selected computer variable
+            // This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
-            //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            // Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
             foreach (object SelectedComputer in ComputerSelected)
             {
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
                 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
-                //Command that gets executed on the remote host, here we are just installing Sysmon, not giving it a configuration file yet, wanted to make these steps as modular as possible to accomodate different usecases
+                // Command that gets executed on the remote host, here we are just installing Sysmon, not giving it a configuration file yet, wanted to make these steps as modular as possible to accomodate different usecases
                 inParams["CommandLine"] = "C:\\SysmonFiles\\Sysmon.exe -accepteula -i";
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 
@@ -566,16 +585,16 @@ namespace SysmonConfigPusher
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             
-            //Need to convert the list of computers from the list box into a list first: https://stackoverflow.com/questions/1565504/most-succinct-way-to-convert-listbox-items-to-a-generic-list
-            //ComputersList is the string version of the ListBox contents ComputerList
+            // Need to convert the list of computers from the list box into a list first: https://stackoverflow.com/questions/1565504/most-succinct-way-to-convert-listbox-items-to-a-generic-list
+            // ComputersList is the string version of the ListBox contents ComputerList
             var ComputersList = ComputerList.Items.Cast<String>().ToList();
-            //REF: https://stackoverflow.com/questions/29963240/textbox-textchange-to-update-an-onscreen-listbox-in-c-sharp
-            //I'm not sure exactly what this line does
+            // REF: https://stackoverflow.com/questions/29963240/textbox-textchange-to-update-an-onscreen-listbox-in-c-sharp
+            // I'm not sure exactly what this line does
             System.Windows.Controls.TextBox s = (System.Windows.Controls.TextBox)sender;
-            //Clear the results when searching
+            // Clear the results when searching
             ComputerList.Items.Clear();
 
-            //Loop through newly created list of computers and compare the text, if there is a match, add it to the ListBox
+            // Loop through newly created list of computers and compare the text, if there is a match, add it to the ListBox
             foreach (string value in ComputersList)
             {
                 if (value.IndexOf(s.Text, StringComparison.OrdinalIgnoreCase) >= 0)
@@ -592,7 +611,7 @@ namespace SysmonConfigPusher
 
         private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
         {
-            //This breaks the selection in the listbox, so it's commented out for now
+            // The below code breaks the selection in the listbox, so it's commented out for now
             //txtSearch.AppendText("Filter for Computer...");
         }
         // Stuff that happens when you click "Select All" under the "Computers in Domain" list box
@@ -603,7 +622,7 @@ namespace SysmonConfigPusher
 
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            // Nothing here
         }
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
@@ -620,10 +639,10 @@ namespace SysmonConfigPusher
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            // When the user clicks exit, we log it, close and flush the log file and exit the app
             Log.Debug("Application Exit");
             Log.CloseAndFlush();
             Environment.Exit(0);
-            
         }
     }
 }
