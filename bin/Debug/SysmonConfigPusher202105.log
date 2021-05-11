@@ -4269,3 +4269,234 @@
 2021-05-11 13:56:11.103 -04:00 [INF] win10-15:No such host is known
 2021-05-11 13:56:11.698 -04:00 [INF] win10-17:No such host is known
 2021-05-11 13:56:12.016 -04:00 [INF] win10-18:No such host is known
+2021-05-11 15:00:28.845 -04:00 [INF] Empty path name is not legal.
+2021-05-11 15:01:29.101 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:01:30.762 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-11 15:02:51.701 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:02:57.263 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:03:38.202 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:03:41.614 -04:00 [INF] SERVER Passed Ping Check
+2021-05-11 15:03:41.616 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-11 15:03:41.619 -04:00 [INF] WIN10-2 Passed Ping Check
+2021-05-11 15:03:48.516 -04:00 [INF] SysmonFiles Directory created on WIN10-1
+2021-05-11 15:04:40.175 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:05:46.613 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:05:51.095 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-11 15:05:55.004 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-11 15:06:28.436 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:06:30.576 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-11 15:10:12.181 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:10:16.586 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-11 15:10:16.587 -04:00 [INF] WIN10-2 Passed Ping Check
+2021-05-11 15:10:16.587 -04:00 [INF] SERVER Passed Ping Check
+2021-05-11 15:23:51.140 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:25:04.815 -04:00 [INF] server Passed Ping Check
+2021-05-11 15:25:04.815 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-11 15:25:04.817 -04:00 [INF] win10-2 Passed Ping Check
+2021-05-11 15:25:06.320 -04:00 [INF] win10-5 Was Unreachable
+2021-05-11 15:25:06.321 -04:00 [INF] win10-3 Was Unreachable
+2021-05-11 15:25:06.321 -04:00 [INF] win10-4 Was Unreachable
+2021-05-11 15:25:06.321 -04:00 [INF] win10-6 Was Unreachable
+2021-05-11 15:25:07.155 -04:00 [INF] win10-8:No such host is known
+2021-05-11 15:25:08.269 -04:00 [INF] win10-7:No such host is known
+2021-05-11 15:25:08.301 -04:00 [INF] win10-9:No such host is known
+2021-05-11 15:25:09.063 -04:00 [INF] win10-10:No such host is known
+2021-05-11 15:25:09.451 -04:00 [INF] win10-12:No such host is known
+2021-05-11 15:25:10.104 -04:00 [INF] win10-11:No such host is known
+2021-05-11 15:25:10.602 -04:00 [INF] win10-13:No such host is known
+2021-05-11 15:25:10.644 -04:00 [INF] win10-14:No such host is known
+2021-05-11 15:25:11.177 -04:00 [INF] win10-16:No such host is known
+2021-05-11 15:25:11.388 -04:00 [INF] win10-15:No such host is known
+2021-05-11 15:25:11.781 -04:00 [INF] win10-17:No such host is known
+2021-05-11 15:25:12.403 -04:00 [INF] win10-18:No such host is known
+2021-05-11 15:25:12.868 -04:00 [INF] win10-22:No such host is known
+2021-05-11 15:25:12.922 -04:00 [INF] win10-19:No such host is known
+2021-05-11 15:25:13.470 -04:00 [INF] win10-23:No such host is known
+2021-05-11 15:25:13.695 -04:00 [INF] win10-20:No such host is known
+2021-05-11 15:25:14.074 -04:00 [INF] win10-24:No such host is known
+2021-05-11 15:25:14.638 -04:00 [INF] win10-21:No such host is known
+2021-05-11 15:25:14.687 -04:00 [INF] win10-25:No such host is known
+2021-05-11 15:25:15.183 -04:00 [INF] win10-26:No such host is known
+2021-05-11 15:25:15.237 -04:00 [INF] win10-30:No such host is known
+2021-05-11 15:25:15.798 -04:00 [INF] win10-27:No such host is known
+2021-05-11 15:25:15.996 -04:00 [INF] win10-31:No such host is known
+2021-05-11 15:25:16.380 -04:00 [INF] win10-28:No such host is known
+2021-05-11 15:25:16.930 -04:00 [INF] win10-32:No such host is known
+2021-05-11 15:25:16.985 -04:00 [INF] win10-29:No such host is known
+2021-05-11 15:25:17.521 -04:00 [INF] win10-34:No such host is known
+2021-05-11 15:25:17.553 -04:00 [INF] win10-33:No such host is known
+2021-05-11 15:25:18.096 -04:00 [INF] win10-38:No such host is known
+2021-05-11 15:25:18.319 -04:00 [INF] win10-35:No such host is known
+2021-05-11 15:25:18.667 -04:00 [INF] win10-39:No such host is known
+2021-05-11 15:25:19.222 -04:00 [INF] win10-36:No such host is known
+2021-05-11 15:25:19.301 -04:00 [INF] win10-40:No such host is known
+2021-05-11 15:25:19.815 -04:00 [INF] win10-37:No such host is known
+2021-05-11 15:25:19.862 -04:00 [INF] win10-41:No such host is known
+2021-05-11 15:25:20.383 -04:00 [INF] win10-42:No such host is known
+2021-05-11 15:25:20.574 -04:00 [INF] win10-50:No such host is known
+2021-05-11 15:25:20.940 -04:00 [INF] win10-43:No such host is known
+2021-05-11 15:25:21.510 -04:00 [INF] win10-51:No such host is known
+2021-05-11 15:25:21.579 -04:00 [INF] win10-44:No such host is known
+2021-05-11 15:25:22.095 -04:00 [INF] win10-52:No such host is known
+2021-05-11 15:25:22.141 -04:00 [INF] win10-45:No such host is known
+2021-05-11 15:25:22.859 -04:00 [INF] win10-53:No such host is known
+2021-05-11 15:25:23.245 -04:00 [INF] win10-46:No such host is known
+2021-05-11 15:25:23.821 -04:00 [INF] win10-54:No such host is known
+2021-05-11 15:25:23.901 -04:00 [INF] win10-47:No such host is known
+2021-05-11 15:25:24.376 -04:00 [INF] win10-55:No such host is known
+2021-05-11 15:25:24.436 -04:00 [INF] win10-56:No such host is known
+2021-05-11 15:25:25.089 -04:00 [INF] win10-48:No such host is known
+2021-05-11 15:25:25.170 -04:00 [INF] win10-57:No such host is known
+2021-05-11 15:25:25.528 -04:00 [INF] win10-49:No such host is known
+2021-05-11 15:25:26.087 -04:00 [INF] win10-58:No such host is known
+2021-05-11 15:25:26.116 -04:00 [INF] win10-66:No such host is known
+2021-05-11 15:25:26.196 -04:00 [INF] win10-59:No such host is known
+2021-05-11 15:25:26.672 -04:00 [INF] win10-67:No such host is known
+2021-05-11 15:25:26.729 -04:00 [INF] win10-60:No such host is known
+2021-05-11 15:25:27.426 -04:00 [INF] win10-68:No such host is known
+2021-05-11 15:25:27.454 -04:00 [INF] win10-61:No such host is known
+2021-05-11 15:25:27.848 -04:00 [INF] win10-69:No such host is known
+2021-05-11 15:25:28.384 -04:00 [INF] win10-62:No such host is known
+2021-05-11 15:25:28.415 -04:00 [INF] win10-70:No such host is known
+2021-05-11 15:25:28.489 -04:00 [INF] win10-63:No such host is known
+2021-05-11 15:25:28.992 -04:00 [INF] win10-71:No such host is known
+2021-05-11 15:25:29.053 -04:00 [INF] win10-64:No such host is known
+2021-05-11 15:25:29.576 -04:00 [INF] win10-72:No such host is known
+2021-05-11 15:25:29.709 -04:00 [INF] win10-65:No such host is known
+2021-05-11 15:25:29.751 -04:00 [INF] win10-73:No such host is known
+2021-05-11 15:25:30.151 -04:00 [INF] win10-74:No such host is known
+2021-05-11 15:25:30.675 -04:00 [INF] win10-82:No such host is known
+2021-05-11 15:25:30.722 -04:00 [INF] win10-75:No such host is known
+2021-05-11 15:25:30.801 -04:00 [INF] win10-83:No such host is known
+2021-05-11 15:25:31.271 -04:00 [INF] win10-76:No such host is known
+2021-05-11 15:25:31.332 -04:00 [INF] win10-84:No such host is known
+2021-05-11 15:25:31.884 -04:00 [INF] win10-77:No such host is known
+2021-05-11 15:25:32.007 -04:00 [INF] win10-85:No such host is known
+2021-05-11 15:25:32.075 -04:00 [INF] win10-78:No such host is known
+2021-05-11 15:25:32.464 -04:00 [INF] win10-86:No such host is known
+2021-05-11 15:25:32.986 -04:00 [INF] win10-79:No such host is known
+2021-05-11 15:25:33.018 -04:00 [INF] win10-87:No such host is known
+2021-05-11 15:25:33.106 -04:00 [INF] win10-80:No such host is known
+2021-05-11 15:25:33.573 -04:00 [INF] win10-88:No such host is known
+2021-05-11 15:25:33.631 -04:00 [INF] win10-81:No such host is known
+2021-05-11 15:25:34.192 -04:00 [INF] win10-89:No such host is known
+2021-05-11 15:25:34.296 -04:00 [INF] win10-90:No such host is known
+2021-05-11 15:25:34.373 -04:00 [INF] win10-106:No such host is known
+2021-05-11 15:25:34.754 -04:00 [INF] win10-91:No such host is known
+2021-05-11 15:25:35.300 -04:00 [INF] win10-107:No such host is known
+2021-05-11 15:25:35.334 -04:00 [INF] win10-92:No such host is known
+2021-05-11 15:25:35.376 -04:00 [INF] win10-108:No such host is known
+2021-05-11 15:25:36.038 -04:00 [INF] win10-93:No such host is known
+2021-05-11 15:25:36.069 -04:00 [INF] win10-109:No such host is known
+2021-05-11 15:30:19.387 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-11 15:30:22.523 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-11 15:30:22.523 -04:00 [INF] SERVER Passed Ping Check
+2021-05-11 15:30:22.523 -04:00 [INF] WIN10-2 Passed Ping Check
+2021-05-11 15:31:36.785 -04:00 [INF] server Passed Ping Check
+2021-05-11 15:31:36.807 -04:00 [INF] win10-1 Passed Ping Check
+2021-05-11 15:31:36.808 -04:00 [INF] win10-2 Passed Ping Check
+2021-05-11 15:31:37.818 -04:00 [INF] win10-4 Was Unreachable
+2021-05-11 15:31:37.818 -04:00 [INF] win10-3 Was Unreachable
+2021-05-11 15:31:38.317 -04:00 [INF] win10-5 Was Unreachable
+2021-05-11 15:31:38.317 -04:00 [INF] win10-6 Was Unreachable
+2021-05-11 15:31:39.122 -04:00 [INF] win10-8:No such host is known
+2021-05-11 15:31:40.216 -04:00 [INF] win10-7:No such host is known
+2021-05-11 15:31:40.247 -04:00 [INF] win10-9:No such host is known
+2021-05-11 15:31:40.895 -04:00 [INF] win10-10:No such host is known
+2021-05-11 15:31:41.382 -04:00 [INF] win10-12:No such host is known
+2021-05-11 15:31:41.907 -04:00 [INF] win10-11:No such host is known
+2021-05-11 15:31:42.478 -04:00 [INF] win10-13:No such host is known
+2021-05-11 15:31:42.508 -04:00 [INF] win10-14:No such host is known
+2021-05-11 15:31:43.181 -04:00 [INF] win10-16:No such host is known
+2021-05-11 15:31:43.652 -04:00 [INF] win10-15:No such host is known
+2021-05-11 15:31:44.183 -04:00 [INF] win10-17:No such host is known
+2021-05-11 15:31:44.768 -04:00 [INF] win10-18:No such host is known
+2021-05-11 15:31:44.798 -04:00 [INF] win10-22:No such host is known
+2021-05-11 15:31:45.395 -04:00 [INF] win10-19:No such host is known
+2021-05-11 15:31:45.470 -04:00 [INF] win10-23:No such host is known
+2021-05-11 15:31:45.948 -04:00 [INF] win10-20:No such host is known
+2021-05-11 15:31:46.467 -04:00 [INF] win10-24:No such host is known
+2021-05-11 15:31:47.043 -04:00 [INF] win10-21:No such host is known
+2021-05-11 15:31:47.074 -04:00 [INF] win10-25:No such host is known
+2021-05-11 15:31:47.680 -04:00 [INF] win10-26:No such host is known
+2021-05-11 15:31:47.727 -04:00 [INF] win10-30:No such host is known
+2021-05-11 15:31:48.213 -04:00 [INF] win10-27:No such host is known
+2021-05-11 15:31:48.737 -04:00 [INF] win10-31:No such host is known
+2021-05-11 15:31:49.320 -04:00 [INF] win10-28:No such host is known
+2021-05-11 15:31:49.364 -04:00 [INF] win10-32:No such host is known
+2021-05-11 15:31:49.900 -04:00 [INF] win10-29:No such host is known
+2021-05-11 15:31:49.948 -04:00 [INF] win10-33:No such host is known
+2021-05-11 15:31:49.993 -04:00 [INF] win10-34:No such host is known
+2021-05-11 15:31:50.479 -04:00 [INF] win10-38:No such host is known
+2021-05-11 15:31:51.004 -04:00 [INF] win10-35:No such host is known
+2021-05-11 15:31:51.582 -04:00 [INF] win10-39:No such host is known
+2021-05-11 15:31:51.611 -04:00 [INF] win10-36:No such host is known
+2021-05-11 15:31:52.167 -04:00 [INF] win10-40:No such host is known
+2021-05-11 15:31:52.210 -04:00 [INF] win10-37:No such host is known
+2021-05-11 15:31:52.258 -04:00 [INF] win10-42:No such host is known
+2021-05-11 15:31:52.747 -04:00 [INF] win10-43:No such host is known
+2021-05-11 15:31:53.280 -04:00 [INF] win10-41:No such host is known
+2021-05-11 15:31:53.858 -04:00 [INF] win10-44:No such host is known
+2021-05-11 15:31:53.887 -04:00 [INF] win10-50:No such host is known
+2021-05-11 15:31:54.424 -04:00 [INF] win10-45:No such host is known
+2021-05-11 15:31:54.449 -04:00 [INF] win10-51:No such host is known
+2021-05-11 15:31:54.484 -04:00 [INF] win10-46:No such host is known
+2021-05-11 15:31:54.531 -04:00 [INF] win10-52:No such host is known
+2021-05-11 15:31:55.019 -04:00 [INF] win10-47:No such host is known
+2021-05-11 15:31:55.554 -04:00 [INF] win10-53:No such host is known
+2021-05-11 15:31:56.135 -04:00 [INF] win10-48:No such host is known
+2021-05-11 15:31:56.181 -04:00 [INF] win10-54:No such host is known
+2021-05-11 15:31:56.697 -04:00 [INF] win10-49:No such host is known
+2021-05-11 15:31:56.727 -04:00 [INF] win10-55:No such host is known
+2021-05-11 15:31:56.813 -04:00 [INF] win10-58:No such host is known
+2021-05-11 15:31:57.290 -04:00 [INF] win10-56:No such host is known
+2021-05-11 15:31:57.825 -04:00 [INF] win10-59:No such host is known
+2021-05-11 15:31:58.404 -04:00 [INF] win10-60:No such host is known
+2021-05-11 15:31:58.436 -04:00 [INF] win10-57:No such host is known
+2021-05-11 15:31:58.465 -04:00 [INF] win10-66:No such host is known
+2021-05-11 15:31:58.964 -04:00 [INF] win10-61:No such host is known
+2021-05-11 15:31:59.017 -04:00 [INF] win10-67:No such host is known
+2021-05-11 15:31:59.104 -04:00 [INF] win10-62:No such host is known
+2021-05-11 15:31:59.562 -04:00 [INF] win10-68:No such host is known
+2021-05-11 15:32:00.099 -04:00 [INF] win10-63:No such host is known
+2021-05-11 15:32:00.680 -04:00 [INF] win10-69:No such host is known
+2021-05-11 15:32:00.709 -04:00 [INF] win10-64:No such host is known
+2021-05-11 15:32:00.745 -04:00 [INF] win10-70:No such host is known
+2021-05-11 15:32:01.221 -04:00 [INF] win10-65:No such host is known
+2021-05-11 15:32:01.288 -04:00 [INF] win10-71:No such host is known
+2021-05-11 15:32:01.352 -04:00 [INF] win10-74:No such host is known
+2021-05-11 15:32:01.833 -04:00 [INF] win10-72:No such host is known
+2021-05-11 15:32:02.358 -04:00 [INF] win10-75:No such host is known
+2021-05-11 15:32:02.905 -04:00 [INF] win10-76:No such host is known
+2021-05-11 15:32:02.937 -04:00 [INF] win10-73:No such host is known
+2021-05-11 15:32:02.985 -04:00 [INF] win10-82:No such host is known
+2021-05-11 15:32:03.017 -04:00 [INF] win10-77:No such host is known
+2021-05-11 15:32:03.509 -04:00 [INF] win10-83:No such host is known
+2021-05-11 15:32:03.550 -04:00 [INF] win10-78:No such host is known
+2021-05-11 15:32:03.623 -04:00 [INF] win10-84:No such host is known
+2021-05-11 15:32:04.097 -04:00 [INF] win10-79:No such host is known
+2021-05-11 15:32:04.644 -04:00 [INF] win10-85:No such host is known
+2021-05-11 15:32:05.211 -04:00 [INF] win10-80:No such host is known
+2021-05-11 15:32:05.241 -04:00 [INF] win10-86:No such host is known
+2021-05-11 15:32:05.272 -04:00 [INF] win10-81:No such host is known
+2021-05-11 15:32:05.301 -04:00 [INF] win10-87:No such host is known
+2021-05-11 15:32:05.785 -04:00 [INF] win10-90:No such host is known
+2021-05-11 15:32:05.836 -04:00 [INF] win10-88:No such host is known
+2021-05-11 15:32:05.912 -04:00 [INF] win10-91:No such host is known
+2021-05-11 15:32:06.367 -04:00 [INF] win10-89:No such host is known
+2021-05-11 15:32:06.910 -04:00 [INF] win10-92:No such host is known
+2021-05-11 15:32:06.974 -04:00 [INF] win10-106:No such host is known
+2021-05-11 15:32:07.467 -04:00 [INF] win10-93:No such host is known
+2021-05-11 15:32:07.514 -04:00 [INF] win10-107:No such host is known
+2021-05-11 15:32:07.544 -04:00 [INF] win10-94:No such host is known
+2021-05-11 15:32:07.575 -04:00 [INF] win10-108:No such host is known
+2021-05-11 15:32:08.059 -04:00 [INF] win10-95:No such host is known
+2021-05-11 15:32:08.096 -04:00 [INF] win10-109:No such host is known
+2021-05-11 15:32:08.173 -04:00 [INF] win10-96:No such host is known
+2021-05-11 15:32:08.661 -04:00 [INF] win10-110:No such host is known
+2021-05-11 15:32:09.178 -04:00 [INF] win10-97:No such host is known
+2021-05-11 15:32:09.224 -04:00 [INF] win10-111:No such host is known
+2021-05-11 15:32:09.765 -04:00 [INF] win10-98:No such host is known
+2021-05-11 15:32:09.805 -04:00 [INF] win10-112:No such host is known
+2021-05-11 15:32:09.966 -04:00 [INF] win10-113:No such host is known
+2021-05-11 15:32:10.001 -04:00 [INF] win10-99:No such host is known

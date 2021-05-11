@@ -115,6 +115,11 @@ namespace SysmonConfigPusher
 
         public void SelectComputers_Click(object sender, RoutedEventArgs e)
         {
+            if (ComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer from the Live Computers in Domain List");
+                return;
+            }
             //Need better logic for handling duplicates here
             SelectedComputerList.Items.Clear();
 
@@ -352,6 +357,13 @@ namespace SysmonConfigPusher
             //This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
             //Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+
+            if (SelectedComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer");
+                return;
+            }
+
             foreach (object SelectedComputer in ComputerSelected)
             {
                 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
@@ -374,6 +386,11 @@ namespace SysmonConfigPusher
         // This stuff happens when you click the "Update config on selected computers button"
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            if (SelectedComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer");
+                return;
+            }
             // If the selected listbox item is the tag of the config, rather than the configuration itself, pop up an error and let the user try again
             string selectedItem = Configs.Items[Configs.SelectedIndex].ToString();
             bool containsTag = selectedItem.Contains("Tag");
@@ -477,17 +494,31 @@ namespace SysmonConfigPusher
             openFileDialog1.Title = "Browse to your list of Computers (.txt)";
             openFileDialog1.DefaultExt = "txt";
             openFileDialog1.Filter = "txt files (*.txt)|*.txt";
-            string[] computers = System.IO.File.ReadAllLines(openFileDialog1.FileName);
-
-            foreach (string computer in computers)
+            try
             {
-                ComputerList.Items.Add(computer);
-            }           
+                string[] computers = System.IO.File.ReadAllLines(openFileDialog1.FileName);
+                foreach (string computer in computers)
+                {
+                    ComputerList.Items.Add(computer);
+                }
+            }
+            catch (Exception openfilesexception)
+            {
+                Log.Information(openfilesexception.Message + " - this is logged when no computer list is selected");
+            }
+            
+
+     
         }
 
         // Stuff that happens when you click the uninstall Sysmon button
         private void UnInstallSysmon_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer");
+                return;
+            }
             System.Collections.IList
             //This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
@@ -507,6 +538,11 @@ namespace SysmonConfigPusher
         // Stuff that happens when you click the "Install Sysmon on Selected Computers" button
         private void InstallSysmon_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer");
+                return;
+            }
             System.Collections.IList
             //This grabs the selected computer variable
             ComputerSelected = SelectedComputerList.SelectedItems;
@@ -559,7 +595,7 @@ namespace SysmonConfigPusher
             //This breaks the selection in the listbox, so it's commented out for now
             //txtSearch.AppendText("Filter for Computer...");
         }
-        // Stuff that happens when you click "Select All"
+        // Stuff that happens when you click "Select All" under the "Computers in Domain" list box
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             ComputerList.SelectAll();
@@ -574,6 +610,12 @@ namespace SysmonConfigPusher
         {
             System.Windows.Forms.Application.Restart();
             Environment.Exit(0);
+        }
+
+        // Stuff that happens when you click "Select All" under the "Click on computers you want to action" listbox
+        private void SelectAllActionComputers_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedComputerList.SelectAll();
         }
     }
 }

@@ -30,23 +30,23 @@
         <Button x:Name="LoadConfigs" Content="Load Configs" Grid.Column="1" HorizontalAlignment="Left" Margin="447.6,52,0,0" VerticalAlignment="Top" Width="175" Height="33" Click="LoadConfigs_Click" RenderTransformOrigin="-0.216,0.296"/>
         <ListBox x:Name="Configs" Grid.Column="1" HorizontalAlignment="Left" Height="426" Margin="406.6,230,0,0" VerticalAlignment="Top" Width="239" Grid.RowSpan="2"/>
         <Label Content="Pick the Sysmon Config To Deploy:" Grid.Column="1" HorizontalAlignment="Left" Margin="406.6,199,0,0" VerticalAlignment="Top" Width="239" FontWeight="Bold"/>
-        <Button x:Name="CreateDirectories" Content="Create Directories&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Center" Margin="135.6,198,-80.8,0" VerticalAlignment="Top" Width="166" Click="CreateDirectories_Click" Height="35" VerticalContentAlignment="Center"/>
+        <Button x:Name="CreateDirectories" Content="Create Directories&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Center" Margin="134.6,198,-64.6,0" VerticalAlignment="Top" Width="166" Click="CreateDirectories_Click" Height="35" VerticalContentAlignment="Center"/>
         <Button Content="Clear Configs" Grid.Column="1" HorizontalAlignment="Left" Margin="405.6,258.6,0,0" VerticalAlignment="Top" Width="240" Click="Button_Click_2" Grid.Row="1"/>
         <Button x:Name="UpdateConfigs" Content="Update Config on &#xD;&#xA;Selected Computers" Grid.Column="2" HorizontalAlignment="Left" Margin="132.6,282.6,-65.6,0" VerticalAlignment="Top" Width="165" Height="36" Click="Button_Click_3" RenderTransformOrigin="0.497,3.118" Grid.Row="1"/>
         <Button x:Name="PushExecutable" Content="Push Newest Executable&#xD;&#xA;From Sysinternals" Grid.Column="2" HorizontalAlignment="Left" Margin="131.6,329,-76.8,0" VerticalAlignment="Top" Width="166" Height="36" Click="PushExecutable_Click"/>
-        <Button x:Name="UnInstallSysmon" Content="UnInstall Sysmon from&#xD;&#xA;Selected Computers" Grid.Column="1" HorizontalAlignment="Left" Margin="185,327,0,0" VerticalAlignment="Top" Width="168" Height="36" Click="UnInstallSysmon_Click" Grid.Row="1"/>
+        <Button x:Name="UnInstallSysmon" Content="UnInstall Sysmon from&#xD;&#xA;Selected Computers" Grid.Column="1" HorizontalAlignment="Left" Margin="447.6,355.2,0,0" VerticalAlignment="Top" Width="168" Height="36" Click="UnInstallSysmon_Click" Grid.Row="1"/>
         <Button x:Name="InstallSysmon" Content="Install Sysmon On&#xD;&#xA;Selected Computers" Grid.Column="2" HorizontalAlignment="Left" Margin="131.6,36.6,-69.4,0" VerticalAlignment="Top" Width="165" Height="36" Click="InstallSysmon_Click" Grid.Row="1"/>
         <Button x:Name="FromFile" Content="Load Computers From File" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top" Width="172" Height="29" Click="FromFile_Click" Grid.ColumnSpan="2"/>
         <GroupBox Grid.ColumnSpan="2" Header="Step 1: Load Computer List" HorizontalAlignment="Left" Height="123" Margin="10,17,0,0" VerticalAlignment="Top" Width="240"/>
         <GroupBox Header="Step 2: Select Computers" HorizontalAlignment="Left" Height="123" Margin="149.6,17,0,0" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
         <GroupBox Header="Step 2: Load Sysmon Configs" HorizontalAlignment="Left" Height="123" Margin="415.6,17,0,0" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
         <GroupBox Header="Deploy Step 0: Web Server" HorizontalAlignment="Left" Height="123" Margin="75.6,21,-125.8,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
-        <GroupBox Header="Deploy Step 1: Create Directories" HorizontalAlignment="Left" Height="123" Margin="75.6,149,-124.2,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
+        <GroupBox Header="Deploy Step 1: Create Directories" HorizontalAlignment="Left" Height="123" Margin="75.6,149,-109,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 2: Push Sysmon Executable" HorizontalAlignment="Left" Height="123" Margin="76.6,277,-124.4,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 3: Install Sysmon" HorizontalAlignment="Left" Height="123" Margin="76.6,405,-119.6,0" VerticalAlignment="Top" Width="271" Grid.Column="2" FontWeight="Bold" Grid.RowSpan="2"/>
         <GroupBox Header="Deploy Step 4: Push Sysmon Config" HorizontalAlignment="Left" Height="123" Margin="76.6,114.6,-117.2,0" VerticalAlignment="Top" Width="271" Grid.Column="2" Grid.Row="1" FontWeight="Bold"/>
         <GroupBox Header="Deploy Step 5: Update Config" HorizontalAlignment="Left" Height="123" Margin="76.6,242.6,-114.8,0" VerticalAlignment="Top" Width="271" Grid.Column="2" Grid.Row="1" FontWeight="Bold"/>
-        <GroupBox Header="Uninstall / Upgrade" HorizontalAlignment="Left" Height="123" Margin="131,283,0,0" VerticalAlignment="Top" Width="271" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
+        <GroupBox Header="Uninstall / Upgrade" HorizontalAlignment="Left" Height="101" Margin="415.6,323.2,0,0" VerticalAlignment="Top" Width="240" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
         <TextBox x:Name="txtSearch" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Margin="10,150,0,0" TextWrapping="Wrap" Text="Filter for Computer..." VerticalAlignment="Top" Width="240" TextChanged="txtSearch_TextChanged" GotFocus="txtSearch_GotFocus" LostFocus="txtSearch_LostFocus"/>
         <Separator Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="283.6,382,-205.8,0" VerticalAlignment="Top" Width="807" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Separator.RenderTransform>
@@ -58,10 +58,11 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="106" Click="Button_Click_4" Grid.ColumnSpan="2"/>
+        <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230" Click="Button_Click_4" Grid.ColumnSpan="2"/>
         <ProgressBar x:Name="myprogressDialog" HorizontalAlignment="Left" Height="20" Margin="150.6,164,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
         <Label x:Name="StatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="415.6,150,0,0" VerticalAlignment="Top" Height="49" Width="240"/>
         <Button x:Name="RestartButton" Content="Restart&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Left" Margin="304.6,403.2,-144.4,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="RestartButton_Click" Height="21" BorderBrush="#FFFF0404" Background="#FFCB9393" OpacityMask="#FF9F7777"/>
+        <Button x:Name="SelectAllActionComputers" Content="Select All" Grid.Column="1" HorizontalAlignment="Left" Margin="150.6,283.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="238" Click="SelectAllActionComputers_Click"/>
 
     </Grid>
 </Window>
