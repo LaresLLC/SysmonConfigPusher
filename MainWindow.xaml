@@ -61,8 +61,9 @@
         <Button x:Name="SelectAllComputers" Content="Select All" HorizontalAlignment="Left" Margin="20,283.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230" Click="Button_Click_4" Grid.ColumnSpan="2"/>
         <ProgressBar x:Name="myprogressDialog" HorizontalAlignment="Left" Height="20" Margin="150.6,164,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" ValueChanged="ProgressBar_ValueChanged"/>
         <Label x:Name="StatusLabel" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="415.6,150,0,0" VerticalAlignment="Top" Height="49" Width="240"/>
-        <Button x:Name="RestartButton" Content="Restart&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Left" Margin="304.6,403.2,-144.4,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="RestartButton_Click" Height="21" BorderBrush="#FFFF0404" Background="#FFCB9393" OpacityMask="#FF9F7777"/>
+        <Button x:Name="RestartButton" Content="Restart&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Left" Margin="76.6,370.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="RestartButton_Click" Height="21" BorderBrush="#FFFF0404" Background="#FFCB9393" OpacityMask="#FF9F7777"/>
         <Button x:Name="SelectAllActionComputers" Content="Select All" Grid.Column="1" HorizontalAlignment="Left" Margin="150.6,283.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="238" Click="SelectAllActionComputers_Click"/>
+        <Button x:Name="ExitButton" Content="Exit" Grid.Column="2" HorizontalAlignment="Left" Margin="272.6,370.2,-108.4,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="21" Background="#FFCB9393" FontWeight="Bold" Click="ExitButton_Click"/>
 
     </Grid>
 </Window>

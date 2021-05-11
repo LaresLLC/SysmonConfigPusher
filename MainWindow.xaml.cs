@@ -191,7 +191,7 @@ namespace SysmonConfigPusher
                         }
                         catch (Exception pingexception)
                         {
-                            Log.Information(SelectedComputer + ":" + pingexception.InnerException.Message);
+                            Log.Debug(SelectedComputer + " : " + pingexception.InnerException.Message);
                         }
                     });
                 } );
@@ -616,6 +616,14 @@ namespace SysmonConfigPusher
         private void SelectAllActionComputers_Click(object sender, RoutedEventArgs e)
         {
             SelectedComputerList.SelectAll();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Log.Debug("Application Exit");
+            Log.CloseAndFlush();
+            Environment.Exit(0);
+            
         }
     }
 }
