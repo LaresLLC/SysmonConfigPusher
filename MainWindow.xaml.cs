@@ -460,23 +460,32 @@ namespace SysmonConfigPusher
                 EventLogSession session = new EventLogSession(SelectedComputer.ToString());
                 EventLogQuery query = new EventLogQuery("Microsoft-Windows-Sysmon/Operational", PathType.LogName, logQuery);
                 query.Session = session;
-                EventLogReader logReader = new EventLogReader(query);
+                try
+                {
+                    EventLogReader logReader = new EventLogReader(query);
+                    for (EventRecord eventdetail = logReader.ReadEvent(); eventdetail != null; eventdetail = logReader.ReadEvent())
+                    {
+                        // EventData variable contains the detail of each event in XML format, I tried to use LINQ to extract the XML elements instead of regex but found regex to be simpler, please don't hate me for the upcoming dirty regexes
+                        string EventData = eventdetail.ToXml();
+                        // RegEx used to extract just the SHA256 hash from Event ID 16
+                        Regex SHA256 = new Regex(@"[A-Fa-f0-9]{64}");
+                        // Put the matched regex (the SHA256) hash into a variable called SHA256Value
+                        Match SHA256Value = SHA256.Match(EventData);
+                        // Another awful regex to extract the time stamp from Event ID 16 - the SHA256 value of the updated config as well as the time stamp get logged, this way you can validate that the right configuration file got pushed to the right computer
+                        Regex LoggedEventTime = new Regex(@"\d\d\d\d\-\d\d\-\d\d.\d\d\:\d\d\:\d\d\.\d\d\d");
+                        Match MatchedLoggedEventTime = LoggedEventTime.Match(EventData);
+                        // Log showing that we found an Event ID 16 on the selected remote host, and we log the time and SHA256 value of the configuration file pushed
+                        Log.Information("Found Config Update Event on " + SelectedComputer + " Logged at " + MatchedLoggedEventTime + "." + " Updated with config file with the SHA256 Hash of: " + SHA256Value.ToString());
+                    }
+                }
+                catch(Exception eventlogexception)
+                {
+                    Log.Debug(eventlogexception.Message + ": You may have hit the update configs button on a host with Sysmon not installed");
+                }
+                
 
                 // Loop through the events that were returned in the above query
-                for(EventRecord eventdetail = logReader.ReadEvent(); eventdetail!=null; eventdetail = logReader.ReadEvent())
-                {
-                    // EventData variable contains the detail of each event in XML format, I tried to use LINQ to extract the XML elements instead of regex but found regex to be simpler, please don't hate me for the upcoming dirty regexes
-                    string EventData = eventdetail.ToXml();
-                    // RegEx used to extract just the SHA256 hash from Event ID 16
-                    Regex SHA256 = new Regex(@"[A-Fa-f0-9]{64}");
-                    // Put the matched regex (the SHA256) hash into a variable called SHA256Value
-                    Match SHA256Value = SHA256.Match(EventData);
-                    // Another awful regex to extract the time stamp from Event ID 16 - the SHA256 value of the updated config as well as the time stamp get logged, this way you can validate that the right configuration file got pushed to the right computer
-                    Regex LoggedEventTime = new Regex(@"\d\d\d\d\-\d\d\-\d\d.\d\d\:\d\d\:\d\d\.\d\d\d");
-                    Match MatchedLoggedEventTime = LoggedEventTime.Match(EventData);
-                    // Log showing that we found an Event ID 16 on the selected remote host, and we log the time and SHA256 value of the configuration file pushed
-                    Log.Information("Found Config Update Event on " + SelectedComputer + " Logged at " + MatchedLoggedEventTime + "." + " Updated with config file with the SHA256 Hash of: " + SHA256Value.ToString());                    
-                }
+                
             }
         }
         // Stuff that happens when you click "Push latest Sysmon executable from sysinternals" button
