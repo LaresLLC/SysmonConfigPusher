@@ -1,3 +1,22 @@
+- [Intro](#intro)
+- [Scale is Hard](#scale-is-hard)
+- [Just Push It](#just-push-it)
+- [Requirements](#requirements)
+- [Usage](#usage)
+  - [Edit SysmonConfigPusher.exe.config](#edit-sysmonconfigpusherexeconfig)
+  - [Tag your Sysmon Configs](#tag-your-sysmon-configs)
+  - [Push Your Configs](#push-your-configs)
+- [Why So Many Buttons ?](#why-so-many-buttons-)
+- [Under the Hood](#under-the-hood)
+- [Security & Artifacts](#security--artifacts)
+  - [Create Directories](#create-directories)
+  - [Push Newst Executable From Sysinternals](#push-newst-executable-from-sysinternals)
+  - [Install Sysmon on Selected Computers](#install-sysmon-on-selected-computers)
+  - [Push Configs](#push-configs)
+  - [Update Config on Selected Computers](#update-config-on-selected-computers)
+  - [Uninstall Sysmon from Selected Computers](#uninstall-sysmon-from-selected-computers)
+- [The Sysmon Config Pusher Log File](#the-sysmon-config-pusher-log-file)
+
 # Intro
 
 Sysmon is an amazing tool that gives you enhanced visibility on endpoints. Installing Sysmon is a fairly straightforward process, involving a few commands and a configuration file.
