@@ -153,6 +153,8 @@ inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Pat
 ```
 
 # Security & Artifacts
+  
+To keep the setup of Sysmon Config Pusher simple, the web server used runs over HTTP not HTTPS - this means that your Sysmon configuration file is transferred over the network in plain text. This introduces some risk, but the assumption is made that an attacker is not in your network in a MITM position. If this becomes a large issue for users, HTTPS support can be added in the future.
 
 Because SysmonConfigPusher uses a privileged account, it's a good idea to monitor exactly what this account is doing and ensuring that it is only doing things that SysmonConfigPusher is configured to do and that is logging in from the server that SysmonConfigPusher is being ran on. There are only a few commands issued by SysmonConfigPusher to remote systems, so baselining this activity should be straight forward.
 
