@@ -31,16 +31,18 @@ This is the problem SysmonConfigPusher attempts to solve. Rather than having hos
 
 The configuration for Sysmon Config Pusher has three main values that you will want to change:
 
-- DomainName: This is the domain that SysmonConfigPusher will load computers from (You Can also load a list of computers via a text file)
-- WebServerIP: SysmonConfigPusher has a built in web server which endpoints connect to in order to download the appropriate Sysmon configuration file, this value needs to be set to an IP address that is able to bind to port 80
+- DomainName: This is the domain that SysmonConfigPusher will load computers from (You can also load a list of computers via a text file)
+
+- WebServerIP: SysmonConfigPusher has a built in web server which endpoints connect to in order to download the appropriate Sysmon configuration file, this value needs to be set to an IP address that is able to bind to port 80 using the HTTP protocol.
+
 - SysmonConfigLocation: This is the directory, on the host that is running SysmonConfigPusher, that holds your various Sysmon configs - NOTE: The "\\" need to be escaped here
 
 An example: 
 
 ```xml
 <!-- DomainName should be the value of the domain that you want to get a listing of computers from 
-  Example values: larescf - this does NOT need to be the FQDN of the domain -->
-<add key="DomainName" value="larescf" />
+  Example values: larescf - this is the FQDN of the domain -->
+<add key="DomainName" value="larescf.local" />
 <!-- WebServerIP is the IPv4 address on which your web server will listen, on port 80 -->
 <add key="WebServerIP" value="192.168.1.134" />
 <!-- SysmonConfigLocation is the value where your local Sysmon configurations live, this value must be escaped: C:\\SysmonConfigs\\ NOT C:\SysmonConfigs\ -->
@@ -49,9 +51,11 @@ An example:
 
 ## Tag your Sysmon Configs
 
-After editing the SysmonConfigPusher.exe.config, and setting the appropriate SysmonConfigLocation value, you can now go into that directory and create a Sysmon configuration file. I highly suggest taking a look at Carlos Perez's Sysmon extension for VSCode: https://marketplace.visualstudio.com/items?itemName=DarkOperator.sysmon for creating and working with Sysmon configurations. 
+After editing the SysmonConfigPusher.exe.config, and setting the appropriate SysmonConfigLocation value, you can now go into that configured directory location and create or place an existing Sysmon configuration file within it. 
 
-Once your Sysmon configuration file is created, you need to add the following comment: 
+I highly suggest taking a look at Carlos Perez's Sysmon extension for VSCode: https://marketplace.visualstudio.com/items?itemName=DarkOperator.sysmon for creating and working with Sysmon configurations. 
+
+Once your Sysmon configuration file is created, you need to add the following comment somewhere within your Sysmon configuration file: 
 
 ```xml
 <!--SCPTAG: Silent Config-->
@@ -79,7 +83,7 @@ Computer3
 
 At this point you should see the computers you selected in the "Computers in Domain" text box.
 
-Next, highlight the computers you want to perform actions on, within the "Computers in Domain" window, and then click on the "Select Computers" button - the computers you selected show now appear in the "Click on computers you want to action" window.
+Next, highlight the computers you want to perform actions on, within the "Computers in Domain" window, and then click on the "Select Computers" button - the computers you selected show now appear in the "Click on computers you want to action" window. SysmonConfigPusher will perform a quick ping check on these machines and will only add live ones to the "Click on computers you want to action" window.
 
 Next, again highlight the computers you want to perform actions on, within the "Click on computers you want to action" window.
 
@@ -111,6 +115,8 @@ The buttons on the right side of the Sysmon Config Pusher UI are designed to wal
 
 **Update Config on Selected Computers** - This initiates the "Sysmon64.exe -c <config value.xml>" command on the selected computers
 
+**Uninstall Sysmon from Selected Computers** - Uninstalls Sysmon from the selected computers using the -u flag
+
 # Why So Many Buttons ? 
 
 Sysmon Config Pusher has a lot of moving parts and logically seperating these tasks using graphical buttons helps me keep track of what I'm doing 😎 
@@ -133,7 +139,7 @@ Get/Load Computers --> Select Computers --> Load Configs --> Start Web Server --
 
 # Under the Hood
 
-Sysmon Config Pusher relies on WMI and PowerShell to issue remote commands to the computers you select, here's an example snippet of what happens when you click the "Push Newst Executable From Sysinternals" button:
+Sysmon Config Pusher relies on WMI and PowerShell to issue remote commands to the computers you select, here's an example snippet of what happens when you click the "Push Newest Executable From Sysinternals" button:
 
 ```csharp
 ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
@@ -151,6 +157,8 @@ inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Pat
 ```
 
 # Security & Artifacts
+  
+To keep the setup of Sysmon Config Pusher simple, the web server used runs over HTTP not HTTPS - this means that your Sysmon configuration file is transferred over the network in plain text. This introduces some risk, but the assumption is made that an attacker is not in your network in a MITM position. If this becomes a large issue for users, HTTPS support can be added in the future.
 
 Because SysmonConfigPusher uses a privileged account, it's a good idea to monitor exactly what this account is doing and ensuring that it is only doing things that SysmonConfigPusher is configured to do and that is logging in from the server that SysmonConfigPusher is being ran on. There are only a few commands issued by SysmonConfigPusher to remote systems, so baselining this activity should be straight forward.
 
@@ -437,3 +445,33 @@ A Parent or Creator Process of WmiPrvSE.exe is common among all the commands iss
   <Data Name="ParentProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
   <Data Name="MandatoryLabel">S-1-16-12288</Data> 
 ```
+
+# The Sysmon Config Pusher Log File
+  
+The log file will contain information regarding which computers passed and did not pass the ping check: 
+
+```2021-05-14 12:32:36.989 -04:00 [INF] WIN10-1 Passed Ping Check```
+  
+```2021-05-14 12:33:21.475 -04:00 [DBG] win10-7 : No such host is known```
+  
+The log file will also contain information regarding the web server, what IP it used and where it is serving configuration files from:
+  
+```2021-05-14 12:32:40.849 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\```
+
+  When you click the "Update Config on Selected Computers" button, Sysmon Config Pusher will try to connect to the remote machine and look for the Sysmon Configuration State Change event (Event ID 16) and extract the SHA256 hash of the configuration value from the remote system so that you can verify that the machine did indeed perform a config update. 
+  
+```2021-05-19 12:48:14.332 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-19T16:47:58.727. Updated with config file with the SHA256 Hash of: B24D08B5CC436B5FEA2A7481E911376E8FE88031B3F42D3F4CBDA0AE6FA94B6C```
+  
+If you try to update the config file on a host that does not have Sysmon installed yet, you may see the following in the log file: 
+
+```2021-05-19 12:47:35.672 -04:00 [DBG] The specified channel could not be found: You may have hit the update configs button on a host with Sysmon not installed```
+
+This means that Sysmon Config Pusher attempted to read the Sysmon log channel, but could not find it.
+  
+You may also see a "Found Config Update Event" with no hash:
+ 
+```2021-05-19 12:48:14.332 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-19T16:47:54.431. Updated with config file with the SHA256 Hash of: ```
+
+This occurs if Sysmon Config Pusher looks for the event before it is logged, this may occur during fresh Sysmon installations.
+
+  
