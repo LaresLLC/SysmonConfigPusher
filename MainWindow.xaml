@@ -18,10 +18,10 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="GetDomainComputers" Content="Get Domain Computers" HorizontalAlignment="Left" Margin="36,54,0,0" VerticalAlignment="Top" Width="172" Height="31" Click="Button_Click" Grid.ColumnSpan="2"/>
         <ListBox x:Name="ComputerList" HorizontalAlignment="Left" Height="426" Margin="20,230,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ListBox_SelectionChanged_1" SelectionMode="Multiple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-        <Label x:Name="DomainListLabel" Content="Live Computers in Domain" HorizontalAlignment="Left" Margin="20,198,0,0" VerticalAlignment="Top" Width="230" Grid.ColumnSpan="2" FontWeight="Bold"/>
+        <Label x:Name="DomainListLabel" Content="Computer List:" HorizontalAlignment="Left" Margin="20,199,0,0" VerticalAlignment="Top" Width="230" Grid.ColumnSpan="2" FontWeight="Bold"/>
         <Button x:Name="SelectComputers" Content="Select Computers" HorizontalAlignment="Left" Margin="177.6,54,0,0" VerticalAlignment="Top" Width="175" Height="31" Click="SelectComputers_Click" Grid.Column="1"/>
         <ListBox x:Name="SelectedComputerList" Grid.Column="1" HorizontalAlignment="Left" Height="426" Margin="149,230,0,0" VerticalAlignment="Top" Width="240" Grid.RowSpan="2" SelectionMode="Multiple"/>
-        <Label x:Name="ComputerSelection" Content="Click on computers you want to action" HorizontalAlignment="Left" Margin="149.6,198,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" FontWeight="Bold"/>
+        <Label x:Name="ComputerSelection" Content="Click on computers you want to action:" HorizontalAlignment="Left" Margin="150.6,199,0,0" VerticalAlignment="Top" Width="239" Grid.Column="1" FontWeight="Bold"/>
         <Button x:Name="PushConfigs" Content="Push Configs&#xA;" Grid.Column="2" HorizontalAlignment="Center" Margin="131.8,160.6,-67.2,0" VerticalAlignment="Top" Width="165" Click="ExecuteCommand_Click" Grid.Row="1"/>
         <Button x:Name="ClearSelectedComputers" Content="Clear Selected Computers" Grid.Column="1" HorizontalAlignment="Left" Margin="150,259,0,0" VerticalAlignment="Top" Width="239" Click="ClearSelectedComputers_Click" Grid.Row="1"/>
         <Button Content="Clear Computers in Domain List" HorizontalAlignment="Left" Margin="20,259,0,0" VerticalAlignment="Top" Width="230" Click="Button_Click_1" Grid.Row="1" Grid.ColumnSpan="2"/>
@@ -29,7 +29,7 @@
         <Label x:Name="WebServerLabel" Content="Web Server Stopped" HorizontalAlignment="Left" Margin="103.6,40,-50.8,0" VerticalAlignment="Top" Width="168" Grid.Column="2"/>
         <Button x:Name="LoadConfigs" Content="Load Configs" Grid.Column="1" HorizontalAlignment="Left" Margin="447.6,52,0,0" VerticalAlignment="Top" Width="175" Height="33" Click="LoadConfigs_Click" RenderTransformOrigin="-0.216,0.296"/>
         <ListBox x:Name="Configs" Grid.Column="1" HorizontalAlignment="Left" Height="426" Margin="406.6,230,0,0" VerticalAlignment="Top" Width="239" Grid.RowSpan="2"/>
-        <Label Content="Pick the Sysmon Config To Deploy:" Grid.Column="1" HorizontalAlignment="Left" Margin="406.6,199,0,0" VerticalAlignment="Top" Width="239" FontWeight="Bold"/>
+        <Label Content="Pick the Sysmon Config To Deploy:" Grid.Column="1" HorizontalAlignment="Left" Margin="405.6,199,0,0" VerticalAlignment="Top" Width="239" FontWeight="Bold"/>
         <Button x:Name="CreateDirectories" Content="Create Directories&#xD;&#xA;" Grid.Column="2" HorizontalAlignment="Center" Margin="134.6,198,-64.6,0" VerticalAlignment="Top" Width="166" Click="CreateDirectories_Click" Height="35" VerticalContentAlignment="Center"/>
         <Button Content="Clear Configs" Grid.Column="1" HorizontalAlignment="Left" Margin="405.6,258.6,0,0" VerticalAlignment="Top" Width="240" Click="Button_Click_2" Grid.Row="1"/>
         <Button x:Name="UpdateConfigs" Content="Update Config on &#xD;&#xA;Selected Computers" Grid.Column="2" HorizontalAlignment="Left" Margin="132.6,282.6,-65.6,0" VerticalAlignment="Top" Width="165" Height="36" Click="Button_Click_3" RenderTransformOrigin="0.497,3.118" Grid.Row="1"/>

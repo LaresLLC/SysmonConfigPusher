@@ -10,3 +10,11 @@
 2021-05-19 12:48:13.441 -04:00 [INF] Updated WIN10-1 with config.xml
 2021-05-19 12:48:14.332 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-19T16:47:54.431. Updated with config file with the SHA256 Hash of: 
 2021-05-19 12:48:14.332 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-19T16:47:58.727. Updated with config file with the SHA256 Hash of: B24D08B5CC436B5FEA2A7481E911376E8FE88031B3F42D3F4CBDA0AE6FA94B6C
+2021-05-19 12:59:12.192 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-19 12:59:17.957 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-19 12:59:19.207 -04:00 [INF] WIN10-1 Passed Ping Check
+2021-05-19 12:59:22.660 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-19 12:59:24.770 -04:00 [INF] Sysmon installed on WIN10-1
+2021-05-19 13:00:23.084 -04:00 [INF] Pushing config_silent.xml to WIN10-1
+2021-05-19 13:00:26.256 -04:00 [INF] Updated WIN10-1 with config_silent.xml
+2021-05-19 13:00:41.146 -04:00 [DBG] Application Exit

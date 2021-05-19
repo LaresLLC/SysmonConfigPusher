@@ -79,6 +79,7 @@ namespace SysmonConfigPusher
         // This part gets the list of computers from the domain
         public static List<string> GetComputers()
         {
+            //REF: https://stackoverflow.com/questions/1605567/list-all-computers-in-active-directory?rq=1
             List<string> computerNames = new List<string>();
             //Get the DomainName from the config file, needs to be a FQDN
             string configDomainName = ConfigurationManager.AppSettings.Get("DomainName");         
