@@ -111,6 +111,8 @@ The buttons on the right side of the Sysmon Config Pusher UI are designed to wal
 
 **Update Config on Selected Computers** - This initiates the "Sysmon64.exe -c <config value.xml>" command on the selected computers
 
+**Uninstall Sysmon from Selected Computers** - Uninstalls Sysmon from the selected computers using the -u flag
+
 # Why So Many Buttons ? 
 
 Sysmon Config Pusher has a lot of moving parts and logically seperating these tasks using graphical buttons helps me keep track of what I'm doing 😎 
