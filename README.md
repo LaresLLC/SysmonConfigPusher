@@ -84,7 +84,7 @@ Once your Sysmon configuration file is created, you need to add the following co
 <!--SCPTAG: Silent Config-->
 ```
 
-SysmonConfigParser will grab anything after the ":" symbol as the configuration tag, so in this case the configuration will be tagged as "Silent Config", so if the comment was:
+SysmonConfigParser will grab anything after the ":" symbol in the configuration tag, so in this case the configuration will be tagged as "Silent Config", so if the comment was:
 
 ```xml
 <!--SCPTAG: Servers-->
@@ -92,7 +92,7 @@ SysmonConfigParser will grab anything after the ":" symbol as the configuration 
 
 The tag assigned will be "Servers"
 
-It does not matter where in the file this comment is, but for ease of use and tracking it is easier to place it on the first line of your Sysmon configuration, above the schemaversion XML attribute. 
+It does not matter where in the file this comment is, but for ease of use and tracking, I reccomend placing it on the first line of your Sysmon configuration, above the schemaversion XML attribute. 
 
 ## Push Your Configs
 
@@ -130,13 +130,13 @@ The buttons on the right side of the Sysmon Config Pusher UI are designed to wal
 
 **Create Directories** - This creates a directory called SysmonFiles in the C:\ drive of the hosts you selected
 
-**Push Newest Executable from Sysinternals** - This downloads the 64bit version of Sysmon from live.sysinternals.com and places it in C:\SysmonFiles on the selected hosts
+**Push Newest Executable from Sysinternals** - This downloads Sysmon.exe from live.sysinternals.com and places it in C:\SysmonFiles on the selected hosts
 
-**Install Sysmon On Selected Computers** - This initates the "Sysmon64.exe -accepteula -i" command on the selected computers for a base Sysmon installation
+**Install Sysmon On Selected Computers** - This initates the "Sysmon.exe -accepteula -i" command on the selected computers for a base Sysmon installation
 
 **Push Configs** - This initates a download of the selected configuration file on the selected computers 
 
-**Update Config on Selected Computers** - This initiates the "Sysmon64.exe -c <config value.xml>" command on the selected computers
+**Update Config on Selected Computers** - This initiates the "Sysmon.exe -c <config value.xml>" command on the selected computers
 
 **Uninstall Sysmon from Selected Computers** - Uninstalls Sysmon from the selected computers using the -u flag
 
@@ -169,7 +169,7 @@ ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\
 ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
 
-inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://live.sysinternals.com/Sysmon64.exe -OutFile C:\\SysmonFiles\\Sysmon64.exe";
+inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command \"Invoke-WebRequest -UseBasicParsing -Uri http://live.sysinternals.com/Sysmon.exe -OutFile C:\\SysmonFiles\\Sysmon.exe";
 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
 ```
 
@@ -181,9 +181,11 @@ inParams["CommandLine"] = "PowerShell -WindowStyle Hidden -Command New-Item -Pat
 
 # Security & Artifacts
   
-To keep the setup of Sysmon Config Pusher simple, the web server used runs over HTTP not HTTPS - this means that your Sysmon configuration file is transferred over the network in plain text. This introduces some risk, but the assumption is made that an attacker is not in your network in a MITM position. If this becomes a large issue for users, HTTPS support can be added in the future.
+To keep the setup of Sysmon Config Pusher simple, the web server used runs over HTTP not HTTPS - **this means that your Sysmon configuration file is transferred over the network in plain text**. This introduces some risk, but the assumption is made that an attacker is not in your network in a MITM position. If this becomes a large issue for users, HTTPS support can be added in the future.
 
-Because SysmonConfigPusher uses a privileged account, it's a good idea to monitor exactly what this account is doing and ensuring that it is only doing things that SysmonConfigPusher is configured to do and that is logging in from the server that SysmonConfigPusher is being ran on. There are only a few commands issued by SysmonConfigPusher to remote systems, so baselining this activity should be straight forward.
+Because SysmonConfigPusher uses a privileged account for its operations, it is a good idea to monitor exactly what this account is doing and ensuring that it is only doing things that SysmonConfigPusher is configured to do.
+  
+It is also important to monitor this account to ensure that it is logging in from the host that SysmonConfigPusher is being ran on. There are only a few commands issued by SysmonConfigPusher to remote systems, so baselining this activity should be straight forward.
 
 ## Create Directories
 
@@ -228,7 +230,7 @@ Because SysmonConfigPusher uses a privileged account, it's a good idea to monito
 
 A Parent or Creator Process of WmiPrvSE.exe is common among all the commands issued by SysmonConfigPusher - the Creator Subject Security ID will be of the NETWORK SERVICE account and the Target Subject Account Name will be the service account used to run SysmonConfigPusher
 
-## Push Newst Executable From Sysinternals
+## Push Newest Executable From Sysinternals
 
 - 4624 Type 3 Event With the account you use to run SysmonConfigPusher with. The IpAddress field should contain the IP address that is running SysmonConfigPusher
 - 4627 Special privileges assigned to new login for the account that is used to run SysmonConfigPusher with
@@ -481,7 +483,7 @@ The log file will also contain information regarding the web server, what IP it 
   
 ```2021-05-14 12:32:40.849 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\```
 
-  When you click the "Update Config on Selected Computers" button, Sysmon Config Pusher will try to connect to the remote machine and look for the Sysmon Configuration State Change event (Event ID 16) and extract the SHA256 hash of the configuration value from the remote system so that you can verify that the machine did indeed perform a config update. 
+When you click the "Update Config on Selected Computers" button, Sysmon Config Pusher will try to connect to the remote machine and look for the Sysmon Configuration State Change event (Event ID 16) and extract the SHA256 hash of the configuration value from the remote system so that you can verify that the machine did indeed perform a config update. 
   
 ```2021-05-19 12:48:14.332 -04:00 [INF] Found Config Update Event on WIN10-1 Logged at 2021-05-19T16:47:58.727. Updated with config file with the SHA256 Hash of: B24D08B5CC436B5FEA2A7481E911376E8FE88031B3F42D3F4CBDA0AE6FA94B6C```
   
