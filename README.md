@@ -46,7 +46,9 @@ This is the problem SysmonConfigPusher attempts to solve. Rather than having hos
 
 # Usage
 
-Grab the zip file from the releases section of this repo and unzip the contents. This host will be the one that hosts your collection of various Sysmon configuration files. Once you've unzipped the file contents and confirmed that the application launches, the next step is editing the configuration file.
+Grab the zip file from the releases section of this repo and unzip the contents. The host that is running SysmonConfigPusher will act as the central repository for your collection of various Sysmon configuration files, other hosts will reach out to it, over HTTP, to download the selected Sysmon configuration files. 
+
+Once you've unzipped the file contents and confirmed that the application launches, the next step is editing the configuration file.
 
 ## Edit SysmonConfigPusher.exe.config
 
