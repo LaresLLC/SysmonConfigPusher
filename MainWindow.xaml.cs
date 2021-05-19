@@ -463,6 +463,7 @@ namespace SysmonConfigPusher
                 try
                 {
                     EventLogReader logReader = new EventLogReader(query);
+                    // Loop through the events that were returned in the above query
                     for (EventRecord eventdetail = logReader.ReadEvent(); eventdetail != null; eventdetail = logReader.ReadEvent())
                     {
                         // EventData variable contains the detail of each event in XML format, I tried to use LINQ to extract the XML elements instead of regex but found regex to be simpler, please don't hate me for the upcoming dirty regexes
@@ -481,11 +482,7 @@ namespace SysmonConfigPusher
                 catch(Exception eventlogexception)
                 {
                     Log.Debug(eventlogexception.Message + ": You may have hit the update configs button on a host with Sysmon not installed");
-                }
-                
-
-                // Loop through the events that were returned in the above query
-                
+                }                
             }
         }
         // Stuff that happens when you click "Push latest Sysmon executable from sysinternals" button
