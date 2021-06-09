@@ -18,3 +18,15 @@
 2021-05-19 13:00:23.084 -04:00 [INF] Pushing config_silent.xml to WIN10-1
 2021-05-19 13:00:26.256 -04:00 [INF] Updated WIN10-1 with config_silent.xml
 2021-05-19 13:00:41.146 -04:00 [DBG] Application Exit
+2021-05-25 13:14:52.845 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-25 13:14:55.627 -04:00 [INF] WIN10-2 Passed Ping Check
+2021-05-25 13:16:22.535 -04:00 [INF] Domain Ping Check Complete for larescf.local
+2021-05-25 13:16:24.381 -04:00 [INF] WIN10-2 Passed Ping Check
+2021-05-25 13:16:26.240 -04:00 [INF] Web Server Started on 192.168.1.134, serving configs from C:\\Users\\Administrator\\Desktop\\SysmonConfigs\\
+2021-05-25 13:16:27.631 -04:00 [INF] SysmonFiles Directory created on WIN10-2
+2021-05-25 13:16:29.006 -04:00 [INF] Sysmon executable pushed to WIN10-2
+2021-05-25 13:16:41.444 -04:00 [INF] Sysmon executable pushed to WIN10-2
+2021-05-25 13:16:59.803 -04:00 [INF] Sysmon installed on WIN10-2
+2021-05-25 13:17:01.600 -04:00 [INF] Pushing modular.xml to WIN10-2
+2021-05-25 13:17:08.881 -04:00 [INF] Updated WIN10-2 with modular.xml
+2021-05-25 13:17:08.913 -04:00 [INF] Found Config Update Event on WIN10-2 Logged at 2021-05-25T17:17:02.962. Updated with config file with the SHA256 Hash of: 

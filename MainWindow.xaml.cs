@@ -449,8 +449,10 @@ namespace SysmonConfigPusher
                 //Commands ran on the remote host to update the configuration file
                 inParams["CommandLine"] = "C:\\SysmonFiles\\Sysmon.exe -c " + FinalSysmonMatchedConfig;
                 inParams["CurrentDirectory"] = @"C:\SysmonFiles";
-
                 ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+
+
+                
 
                 Log.Information("Updated " + SelectedComputer + " with " + FinalSysmonMatchedConfig);
 
@@ -483,7 +485,8 @@ namespace SysmonConfigPusher
                 catch(Exception eventlogexception)
                 {
                     Log.Debug(eventlogexception.Message + ": You may have hit the update configs button on a host with Sysmon not installed");
-                }                
+                }
+                
             }
         }
         // Stuff that happens when you click "Push latest Sysmon executable from sysinternals" button
@@ -650,6 +653,31 @@ namespace SysmonConfigPusher
             Log.Debug("Application Exit");
             Log.CloseAndFlush();
             Environment.Exit(0);
+        }
+
+        private void ConfigCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedComputerList.SelectedIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Please Select a Computer");
+                return;
+            }
+            System.Collections.IList
+            // This grabs the selected computer variable
+            ComputerSelected = SelectedComputerList.SelectedItems;
+            // Run command on whatever computers we selected - probably need a beter way to do this at some point, with multiple threads etc
+            foreach (object SelectedComputer in ComputerSelected)
+            {
+                ManagementClass processClass = new ManagementClass($@"\\{SelectedComputer}\root\cimv2:Win32_Process");
+                ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
+
+                // Command that executed on the remote host, can tinker with this to add the -force flag as well
+                inParams["CommandLine"] = "cmd.exe /c del *.xml"; 
+                inParams["CurrentDirectory"] = @"C:\SysmonFiles";
+                ManagementBaseObject outParams = processClass.InvokeMethod("Create", inParams, null);
+                Log.Information("All *.XML Files Removed From " + SelectedComputer);
+            }
+
         }
     }
 }
