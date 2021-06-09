@@ -1,0 +1,1 @@
+June 9th 2021 - Added button to clean up config files in C:\SysmonFiles directory
